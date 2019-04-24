@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Qiao&#39;s Blog</title>
+  
+  <subtitle>java、python、linux··</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://tyrantqiao.github.io/"/>
+  <updated>2019-04-24T09:20:38.220Z</updated>
+  <id>http://tyrantqiao.github.io/</id>
+  
+  <author>
+    <name>tyrantqiao</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>旅游杂谈-泰国</title>
+    <link href="http://tyrantqiao.github.io/2019/04/21/%E6%97%85%E6%B8%B8%E6%9D%82%E8%B0%88-%E6%B3%B0%E5%9B%BD/"/>
+    <id>http://tyrantqiao.github.io/2019/04/21/旅游杂谈-泰国/</id>
+    <published>2019-04-21T01:44:00.000Z</published>
+    <updated>2019-04-24T09:20:38.220Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;泰国&quot;&gt;&lt;a href=&quot;#泰国&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="随笔" scheme="http://tyrantqiao.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+      <category term="旅游" scheme="http://tyrantqiao.github.io/tags/%E6%97%85%E6%B8%B8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>zookeeper学习笔记之一</title>
+    <link href="http://tyrantqiao.github.io/2019/01/08/zookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E4%B8%80/"/>
+    <id>http://tyrantqiao.github.io/2019/01/08/zookeeper学习笔记之一/</id>
+    <published>2019-01-08T03:39:58.000Z</published>
+    <updated>2019-04-24T09:47:03.717Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;zookeeper&quot;&gt;&lt;a href=&quot;#zookeeper&quot; class=&quot;headerlink&quot; title=&quot;zookeeper&quot;&gt;&lt;/a&gt;zookeeper&lt;/h1&gt;&lt;h2 id=&quot;组成&quot;&gt;&lt;a href=&quot;#组成&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="中间件" scheme="http://tyrantqiao.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IDEA maven无法更新indices解决办法</title>
+    <link href="http://tyrantqiao.github.io/2019/01/05/IDEA-maven%E6%97%A0%E6%B3%95%E6%9B%B4%E6%96%B0indices%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
+    <id>http://tyrantqiao.github.io/2019/01/05/IDEA-maven无法更新indices解决办法/</id>
+    <published>2019-01-05T02:35:26.000Z</published>
+    <updated>2019-04-24T09:48:04.126Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;IDEA-MAVEN&quot;&gt;&lt;a href=&quot;#IDEA-MAVEN&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>2019展望</title>
+    <link href="http://tyrantqiao.github.io/2019/01/01/2019%E6%96%B0%E7%9A%84%E5%B1%95%E6%9C%9B/"/>
+    <id>http://tyrantqiao.github.io/2019/01/01/2019新的展望/</id>
+    <published>2019-01-01T01:44:31.000Z</published>
+    <updated>2019-04-24T13:04:56.887Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;2019&quot;&gt;&lt;a href=&quot;#2019&quot; class=&quot;headerlink&quot; title=&quot;2019&quot;&gt;&lt;/a&gt;2019&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;新的一年当然首先是预祝新年快乐&lt;br&gt;&lt;img
+        
+      
+    
+    </summary>
+    
+    
+      <category term="随笔" scheme="http://tyrantqiao.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+      <category term="计划" scheme="http://tyrantqiao.github.io/tags/%E8%AE%A1%E5%88%92/"/>
+    
+      <category term="旅游" scheme="http://tyrantqiao.github.io/tags/%E6%97%85%E6%B8%B8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>jvm学习笔记之一</title>
+    <link href="http://tyrantqiao.github.io/2018/12/19/jvm%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E4%B8%80/"/>
+    <id>http://tyrantqiao.github.io/2018/12/19/jvm学习笔记之一/</id>
+    <published>2018-12-19T13:16:23.000Z</published>
+    <updated>2019-04-24T09:47:49.354Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;JVM&quot;&gt;&lt;a href=&quot;#JVM&quot; class=&quot;headerlink&quot; title=&quot;JVM&quot;&gt;&lt;/a&gt;JVM&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;Java Virtual
+        
+      
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://tyrantqiao.github.io/tags/java/"/>
+    
+      <category term="学习笔记" scheme="http://tyrantqiao.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="jvm" scheme="http://tyrantqiao.github.io/tags/jvm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java面试题测试，你掌握了吗</title>
+    <link href="http://tyrantqiao.github.io/2018/11/22/Java%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B5%8B%E8%AF%95/"/>
+    <id>http://tyrantqiao.github.io/2018/11/22/Java面试题测试/</id>
+    <published>2018-11-22T08:24:36.000Z</published>
+    <updated>2019-04-24T09:47:59.444Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;面试题目类型&quot;&gt;&lt;a href=&quot;#面试题目类型&quot; class=&quot;headerlink&quot; title=&quot;面试题目类型&quot;&gt;&lt;/a&gt;面试题目类型&lt;/h1&gt;&lt;h2 id=&quot;笔试&quot;&gt;&lt;a href=&quot;#笔试&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://tyrantqiao.github.io/tags/java/"/>
+    
+      <category term="面试" scheme="http://tyrantqiao.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>面试测评常考的图像推理，如何推理解答呢！？</title>
+    <link href="http://tyrantqiao.github.io/2018/10/24/%E9%9D%A2%E8%AF%95%E6%B5%8B%E8%AF%84%E5%B8%B8%E8%80%83%E7%9A%84%E5%9B%BE%E5%83%8F%E6%8E%A8%E7%90%86%EF%BC%8C%E5%A6%82%E4%BD%95%E6%8E%A8%E7%90%86%E8%A7%A3%E7%AD%94%E5%91%A2%EF%BC%81%EF%BC%9F/"/>
+    <id>http://tyrantqiao.github.io/2018/10/24/面试测评常考的图像推理，如何推理解答呢！？/</id>
+    <published>2018-10-24T13:11:31.000Z</published>
+    <updated>2019-04-24T09:46:50.065Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;数学推理题目&quot;&gt;&lt;a href=&quot;#数学推理题目&quot; class=&quot;headerlink&quot; title=&quot;数学推理题目&quot;&gt;&lt;/a&gt;数学推理题目&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;以题目的形式慢慢推进讲解&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+      <category term="面试" scheme="http://tyrantqiao.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="数学" scheme="http://tyrantqiao.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JDK11-String源码以及面试题</title>
+    <link href="http://tyrantqiao.github.io/2018/10/23/JDK11-String%E5%8F%8A%E5%85%B6%E4%BB%96%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    <id>http://tyrantqiao.github.io/2018/10/23/JDK11-String及其他源码分析/</id>
+    <published>2018-10-23T14:56:00.000Z</published>
+    <updated>2019-04-24T09:47:56.501Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;使用版本-JDK10-0-1&quot;&gt;&lt;a href=&quot;#使用版本-JDK10-0-1&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://tyrantqiao.github.io/tags/java/"/>
+    
+      <category term="面试" scheme="http://tyrantqiao.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="源码" scheme="http://tyrantqiao.github.io/tags/%E6%BA%90%E7%A0%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>(JDK11)类加载源码以及面试题</title>
+    <link href="http://tyrantqiao.github.io/2018/10/23/(JDK11)ClassLoader%E6%BA%90%E7%A0%81%E4%BB%A5%E5%8F%8A%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    <id>http://tyrantqiao.github.io/2018/10/23/(JDK11)ClassLoader源码以及面试题/</id>
+    <published>2018-10-23T14:50:00.000Z</published>
+    <updated>2019-04-24T13:05:01.788Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;类加载&quot;&gt;&lt;a href=&quot;#类加载&quot; class=&quot;headerlink&quot; title=&quot;类加载&quot;&gt;&lt;/a&gt;类加载&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;核心: &lt;code&gt;loadClass(String name)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure
+        
+      
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://tyrantqiao.github.io/tags/java/"/>
+    
+      <category term="面试" scheme="http://tyrantqiao.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="源码" scheme="http://tyrantqiao.github.io/tags/%E6%BA%90%E7%A0%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leetcode题目详细解答【java版】持续更新</title>
+    <link href="http://tyrantqiao.github.io/2018/10/18/leetcode%E9%A2%98%E7%9B%AE%E8%AF%A6%E7%BB%86%E8%A7%A3%E7%AD%94%E3%80%90java%E7%89%88%E3%80%91%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/"/>
+    <id>http://tyrantqiao.github.io/2018/10/18/leetcode题目详细解答【java版】持续更新/</id>
+    <published>2018-10-18T06:42:00.000Z</published>
+    <updated>2019-04-24T09:47:40.476Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;leetcode题经&quot;&gt;&lt;a href=&quot;#leetcode题经&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://tyrantqiao.github.io/tags/java/"/>
+    
+      <category term="算法" scheme="http://tyrantqiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HttpTCP系列第一章</title>
+    <link href="http://tyrantqiao.github.io/2018/10/18/HttpTCP%E7%B3%BB%E5%88%97%E7%AC%AC%E4%B8%80%E7%AB%A0/"/>
+    <id>http://tyrantqiao.github.io/2018/10/18/HttpTCP系列第一章/</id>
+    <published>2018-10-18T01:14:00.000Z</published>
+    <updated>2019-04-24T09:48:07.957Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;历史&quot;&gt;&lt;a href=&quot;#历史&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="HTTP" scheme="http://tyrantqiao.github.io/tags/HTTP/"/>
+    
+      <category term="TCP" scheme="http://tyrantqiao.github.io/tags/TCP/"/>
+    
+      <category term="学习笔记" scheme="http://tyrantqiao.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo 一些故障处理与解决方案【持续更新】</title>
+    <link href="http://tyrantqiao.github.io/2018/10/16/exo-%E4%B8%80%E4%BA%9B%E6%95%85%E9%9A%9C%E5%A4%84%E7%90%86%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E3%80%90%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E3%80%91/"/>
+    <id>http://tyrantqiao.github.io/2018/10/16/exo-一些故障处理与解决方案【持续更新】/</id>
+    <published>2018-10-16T06:00:00.000Z</published>
+    <updated>2019-04-24T13:04:53.853Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;hexo故障解决方案&quot;&gt;&lt;a href=&quot;#hexo故障解决方案&quot; class=&quot;headerlink&quot; title=&quot;hexo故障解决方案&quot;&gt;&lt;/a&gt;hexo故障解决方案&lt;/h1&gt;&lt;h2 id=&quot;npm缓慢&quot;&gt;&lt;a href=&quot;#npm缓慢&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="hexo" scheme="http://tyrantqiao.github.io/tags/hexo/"/>
+    
+      <category term="bug" scheme="http://tyrantqiao.github.io/tags/bug/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>健身</title>
+    <link href="http://tyrantqiao.github.io/2018/09/16/%E5%81%A5%E8%BA%AB/"/>
+    <id>http://tyrantqiao.github.io/2018/09/16/健身/</id>
+    <published>2018-09-16T12:01:33.000Z</published>
+    <updated>2019-04-24T09:46:56.359Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;健身&quot;&gt;&lt;a href=&quot;#健身&quot; class=&quot;headerlink&quot; title=&quot;健身&quot;&gt;&lt;/a&gt;健身&lt;/h1&gt;&lt;p&gt;健身的好处，不由分说，996的今天，你不健身，不运动，迟早各种身体损伤缠上你。&lt;/p&gt;
+&lt;h2 id=&quot;怎么健身&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="随笔" scheme="http://tyrantqiao.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git详解【使用以及原理】</title>
+    <link href="http://tyrantqiao.github.io/2018/09/14/git%E8%AF%A6%E8%A7%A3%E3%80%90%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E5%8E%9F%E7%90%86%E3%80%91/"/>
+    <id>http://tyrantqiao.github.io/2018/09/14/git详解【使用以及原理】/</id>
+    <published>2018-09-14T02:59:00.000Z</published>
+    <updated>2019-04-24T13:04:51.284Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;git&quot;&gt;&lt;a href=&quot;#git&quot; class=&quot;headerlink&quot; title=&quot;git&quot;&gt;&lt;/a&gt;git&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;本文以平时工作经历+pro git书籍内容进行阐述，算是做个学习笔记。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;版本控制系统&quot;&gt;&lt;a href=&quot;#版本控制系统&quot; class=&quot;headerlink&quot; title=&quot;版本控制系统&quot;&gt;&lt;/a&gt;版本控制系统&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;本地版本控制系统&lt;blockquote&gt;
+&lt;p&gt;Mac OS X系统上通过rcs命令进行保存并且管理文件补丁，补丁记录着对应文件修订前后的变化&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;集中化版本控制系统&lt;blockquote&gt;
+&lt;p&gt;类似于CVS,Subversion,Perforce之类的,主要核心在于有一个核心服务器负责管理所有文件的修订版本。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;分布式版本控制系统&lt;blockquote&gt;
+&lt;p&gt;Git、Mercurial、Bazaar之类的,客户端不只提取最新的文件版本，而且把repository全部克隆下来&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://tyrantqiao.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="git" scheme="http://tyrantqiao.github.io/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git详解【使用以及原理】</title>
+    <link href="http://tyrantqiao.github.io/2018/09/14/t%E8%AF%A6%E8%A7%A3%E3%80%90%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E5%8E%9F%E7%90%86%E3%80%91-1/"/>
+    <id>http://tyrantqiao.github.io/2018/09/14/t详解【使用以及原理】-1/</id>
+    <published>2018-09-14T02:59:00.000Z</published>
+    <updated>2019-04-24T09:47:17.318Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;git&quot;&gt;&lt;a href=&quot;#git&quot; class=&quot;headerlink&quot; title=&quot;git&quot;&gt;&lt;/a&gt;git&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;本文以平时工作经历+pro git书籍内容进行阐述，算是做个学习笔记。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;版本控制系统&quot;&gt;&lt;a href=&quot;#版本控制系统&quot; class=&quot;headerlink&quot; title=&quot;版本控制系统&quot;&gt;&lt;/a&gt;版本控制系统&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;本地版本控制系统&lt;blockquote&gt;
+&lt;p&gt;Mac OS X系统上通过rcs命令进行保存并且管理文件补丁，补丁记录着对应文件修订前后的变化&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;集中化版本控制系统&lt;blockquote&gt;
+&lt;p&gt;类似于CVS,Subversion,Perforce之类的,主要核心在于有一个核心服务器负责管理所有文件的修订版本。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;分布式版本控制系统&lt;blockquote&gt;
+&lt;p&gt;Git、Mercurial、Bazaar之类的,客户端不只提取最新的文件版本，而且把repository全部克隆下来&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://tyrantqiao.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="git" scheme="http://tyrantqiao.github.io/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>个人面经【持续更新】</title>
+    <link href="http://tyrantqiao.github.io/2018/08/05/%E4%B9%A0%E9%9D%A2%E7%BB%8F%E3%80%90%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E3%80%91/"/>
+    <id>http://tyrantqiao.github.io/2018/08/05/习面经【持续更新】/</id>
+    <published>2018-08-05T06:13:00.000Z</published>
+    <updated>2019-04-24T09:46:59.702Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;面试公司&quot;&gt;&lt;a href=&quot;#面试公司&quot; class=&quot;headerlink&quot; title=&quot;面试公司&quot;&gt;&lt;/a&gt;面试公司&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;按一些收集到的信息加自己的经验总结给大家&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://tyrantqiao.github.io/tags/java/"/>
+    
+      <category term="面经" scheme="http://tyrantqiao.github.io/tags/%E9%9D%A2%E7%BB%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>算法系列之排序</title>
+    <link href="http://tyrantqiao.github.io/2018/08/05/%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%E4%B9%8B%E6%8E%92%E5%BA%8F/"/>
+    <id>http://tyrantqiao.github.io/2018/08/05/算法系列之排序/</id>
+    <published>2018-08-05T06:12:00.000Z</published>
+    <updated>2019-04-24T09:46:41.243Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;algorithms&quot;&gt;&lt;a href=&quot;#algorithms&quot; class=&quot;headerlink&quot; title=&quot;algorithms&quot;&gt;&lt;/a&gt;algorithms&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;Review sort, and learn
+        
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://tyrantqiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="排序" scheme="http://tyrantqiao.github.io/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>课程设计：温度控制</title>
+    <link href="http://tyrantqiao.github.io/2018/08/05/%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%B8%A9%E5%BA%A6%E6%8E%A7%E5%88%B6/"/>
+    <id>http://tyrantqiao.github.io/2018/08/05/设计：温度控制/</id>
+    <published>2018-08-05T06:11:00.000Z</published>
+    <updated>2019-04-24T09:46:46.912Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;课程设计&quot;&gt;&lt;a href=&quot;#课程设计&quot; class=&quot;headerlink&quot; title=&quot;课程设计&quot;&gt;&lt;/a&gt;课程设计&lt;/h1&gt;&lt;h2 id=&quot;温度控制&quot;&gt;&lt;a href=&quot;#温度控制&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="c" scheme="http://tyrantqiao.github.io/tags/c/"/>
+    
+      <category term="课程设计" scheme="http://tyrantqiao.github.io/tags/%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>算法系列之查找</title>
+    <link href="http://tyrantqiao.github.io/2018/08/05/%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%E4%B9%8B%E6%9F%A5%E6%89%BE/"/>
+    <id>http://tyrantqiao.github.io/2018/08/05/算法系列之查找/</id>
+    <published>2018-08-05T06:11:00.000Z</published>
+    <updated>2019-04-24T09:46:44.226Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;查找篇&quot;&gt;&lt;a href=&quot;#查找篇&quot; class=&quot;headerlink&quot; title=&quot;查找篇&quot;&gt;&lt;/a&gt;查找篇&lt;/h1&gt;&lt;h2 id=&quot;查找方法&quot;&gt;&lt;a href=&quot;#查找方法&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://tyrantqiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="查找" scheme="http://tyrantqiao.github.io/tags/%E6%9F%A5%E6%89%BE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Unity+java简单登入注册实现</title>
+    <link href="http://tyrantqiao.github.io/2018/08/05/Unity-java%E7%AE%80%E5%8D%95%E7%99%BB%E5%85%A5%E6%B3%A8%E5%86%8C%E5%AE%9E%E7%8E%B0/"/>
+    <id>http://tyrantqiao.github.io/2018/08/05/Unity-java简单登入注册实现/</id>
+    <published>2018-08-05T06:09:00.000Z</published>
+    <updated>2019-04-24T09:47:14.547Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;实现条件：MySQL+Spring+Unity&lt;/p&gt;
+&lt;p&gt;流程：&lt;/p&gt;
+&lt;div id=&quot;flowchart-0&quot; class=&quot;flow-chart&quot;&gt;&lt;/div&gt;
+
+&lt;p&gt;首先实现InputField来做输入框&lt;br&gt;（编写script时应注意调用using
+        
+      
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://tyrantqiao.github.io/tags/java/"/>
+    
+      <category term="spring" scheme="http://tyrantqiao.github.io/tags/spring/"/>
+    
+      <category term="unity" scheme="http://tyrantqiao.github.io/tags/unity/"/>
+    
+      <category term="mysql" scheme="http://tyrantqiao.github.io/tags/mysql/"/>
+    
+  </entry>
+  
+</feed>
