@@ -1,0 +1,94 @@
+title: 课程设计：温度控制
+author: tyrantqiao
+tags:
+  - c
+  - 课程设计
+categories: []
+date: 2018-08-05 14:11:00
+copyright: true
+toc: true
+---
+
+# 课程设计
+
+## 温度控制
+
+### 程序逻辑
+
+```flow
+st=>start: 读取温度
+op1=>operation: 存为室温
+op2=>operation: 风扇降温
+op3=>operation: 加热片升温
+op4=>operation: 显示温度
+op7=>operation: 停止工作
+
+cond1=>condition: k是否为0
+cond2=>condition: 设置温度是否等于当前温度
+cond3=>condition: 设置温度是否大于当前温度
+
+st->cond1
+cond1(yes)->op1->cond2
+cond1(no)->cond2
+cond2(yes)->op7
+cond2(no)->cond3
+cond3(yes)->op3->op4->st
+cond3(no)->op2->op4->st
+```
+
+#### 程序代码
+
+- 按键扫描函数
+
+```flow
+st=>start: 读取温度
+op1=>operation: 设置温度+0.5℃
+op2=>operation: 设置温度-0.5℃
+op3=>operation: 显示温度
+
+cond1=>condition: 升温按钮
+cond2=>condition: 降温按钮
+
+st->cond1
+cond1(yes)->op1->op3->cond2
+cond1(no)->cond2
+cond2(yes)->op2->op3->cond1
+cond2(no)->cond1
+```
+
+## 实验二
+
+### 实验二逻辑
+
+```flow
+st=>start: 设置块的源地址
+op1=>operation: 设置块的目标地址
+op2=>operation: 设置移动长度
+op3=>operation: 从源地址取数
+op4=>operation: 保存到目的地址中
+op5=>operation: 源地址加1
+op6=>operation: 目的地址加1
+
+cond=>condition: 是否移动完
+e=>end: over
+
+st->op1->op2->op3->op4->op5->op6->cond
+cond(yes)->e
+cond(no)->op3
+```
+
+### 实验一逻辑
+
+```flow
+st=>start: 设置块起始地址
+op1=>operation: 设置块长度
+op2=>operation: 当前地址内容清零
+op3=>operation: 地址加1
+
+cond=>condition: 判断是否清除完
+e=>end: over
+
+st->op1->op2->op3->cond
+cond(yes)->e
+cond(no)->op3
+```

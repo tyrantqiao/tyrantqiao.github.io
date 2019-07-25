@@ -1,0 +1,105 @@
+title: 算法系列之排序
+author: tyrantqiao
+tags:
+  - 算法
+  - 排序
+categories: []
+copyright: true
+date: 2018-08-05 14:12:00
+toc: true
+---
+
+# algorithms
+
+> Review sort, and learn Coursera lessons, share my code, and mark how to make the algorithms visually.
+
+## sorted methods
+
+### Bubble Sort
+
+The best occasion will be o(n), one time recurse, n-1 comparision times.Bubble sort's worst-case and average are both o(n^2)
+
+```python
+do{
+    boolean unordered=false;
+    for(int i=0;i<array_length-1;i++)
+        if(left_element>right_element){
+            swap(left_element,right_element);
+            unordered=true;
+        }
+}while(unordered==true)
+```
+
+### Select sort
+
+o(n^2)
+
+```python
+for index in range(list_length-1):
+    smallest=index
+    for comparision in range(list_length-index-1):
+        if list[smallest]>comparison:
+            smallest=comparision
+    swap(list[index],list[comparision])
+```
+
+### insertion sort:
+
+``` python
+def insertion_sort(list):
+    for index in range(1,len(list)):
+        j=index
+        while(j>0)&&list[j]<list[j-1]:
+            list[j],list[j-1]=list[j-1],list[j]
+            j-=1
+    return list
+```
+
+### merge sort:
+
+> from sarath joseph
+
+``` python
+def merge_sort(x):
+
+if len(x) < 2:return x
+
+result,mid = [],int(len(x)/2)
+
+y = merge_sort(x[:mid])
+z = merge_sort(x[mid:])
+
+while (len(y) > 0) and (len(z) > 0):
+        if y[0] > z[0]:result.append(z.pop(0))
+        else:result.append(y.pop(0))
+
+result.extend(y+z)
+return result
+```
+
+### quick sort
+
+```python
+def quick_sort(list):
+    result=[]
+    for i in range(len(list)-1):
+        if list[i:]<list[i]:
+            resutlt.append(list
+```
+
+### calculate time
+
+```python
+test_list = (random.sample(range(100), 50))
+print(test_list)
+time=bestof(merge_sort,test_list)
+print(time)
+```
+
+> use the same list, test each time consuming:
+
+[7, 84, 89, 47, 73, 24, 91, 55, 70, 44, 23, 80, 3, 25, 94, 58, 64, 17, 76, 12, 6, 87, 42, 51, 75, 20, 30, 22, 74, 41, 61, 52, 53, 1, 27, 56, 38, 79, 83, 93, 4, 86, 90, 69, 0, 96, 46, 40, 67, 50]
+0.00018517441462646942 `merge sort`
+1.3257290654551017e-05 `insert sort`
+0.00017491070573262373 `select sort`
+1.1119017968332957e-05 `Bubble sort`

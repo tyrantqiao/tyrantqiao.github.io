@@ -1,0 +1,163 @@
+title: JDK8学习，特性以及源码
+author: tyrantqiao
+tags:
+  - java
+categories: []
+date: 2018-08-05 13:59:00
+copyright: true
+toc: true
+---
+java8的一些新特性：
+
+ 1. 流处理（`stream API`）
+ 2. 行为参数化  ::
+ 3. Lambda
+ 4. 方法引用（predicate--谓词）
+ 5. 默认方法（default）
+ 6. `Optional<T>`容器对象 可包含空值
+
+**Stream API+lambda+行为参数化**
+
+```
+things=filterThings(things,(Thing a)->a.getColor().equals("red"));
+List<Thing> blueThings=things.stream().filter((Thing t)->t.getColor().equals("blue")).collect(Collectors.toList());
+List<Thing> parallelThings=things.parallelStream().filter((Thing t)->t.getSize()<5).collect(Collectors.toList());
+```
+
+**行为参数化**
+ 1. predicate 流程
+
+```flow
+st=>start: 建立接口（接口有一个默认的方法test）
+op=>operation: 实现这个接口，并重写方法
+e=>end: 行为参数化
+
+st->op->e
+```
+
+```
+public static boolean testSizeBig(Thing thing){
+        return thing.getSize()>5;
+}
+filter(xxx,class::testSizeBig)
+```
+
+**default**
+
+ - 扩写接口且实体类不用显式实现
+ (这样就可以在函数接口内扩写方法，而不破坏函数接口的唯一性--`只能有一个抽象方法`
+
+**Lambda**
+
+- 本质是对应接口的签名
+
+```flow
+st=>start: ()->()
+op1=>operation: 确定接口的类型（比如是String）
+op2=>operation: 确定抽象方法（开始调用【扩写】）
+e=>end
+
+st->op1->op2->e
+```
+
+- 常用函数接口
+> Predicate -- boolean test
+
+> Consumer  -- void accept(T t)
+
+> Function<T,R> -- R apply(T,t)
+
+由于接口泛型缘故，使得必须传入引用类型（Reference Type）使得基本类型要经过boxing，开销大。
+解决：调用IntFunction或者Double之类的避免装箱拆箱过程。
+
+此外Lambda不直接支持异常：
+- try-catch解决
+- 接口处throw
+
+- 关于签名认证，若接口为void，Lambda为语句即可满足，即便返回的是其它类型
+
+- 作用域：实例、static变量（但局部变量必须为final）as: 使局部唯一，避免并行错误
+
+- 操作符： .and .or .andThen(g) .compose(xx)先执行xx
+
+**方法引用**
+()->new XXX() == XXX::new 调用构造器。（无法访问内部类的构造器ｍａｙｂｅ）
+
+多参数接口
+```
+XFunction<T,U,V,R>{
+        R apply(T t,U u, R r);
+}
+```
+
+**流**
+comparing(xx::xx)
+.thenComparing()
+
+- Stream
+.fliter
+.skip
+.collet(toList())
+.max
+.min
+.map(method()) 让每个元素执行函数
+.distinct() 使独一无二
+.anyMatch 至少1
+.noneMatch
+.flatMap(Arrays::Stream) Stream<String> 使流数组汇成一个流
+.ifPresent  若有值则true或者执行语句
+.reduce(Initial, BinaryOperator<T>) 初始值若不加则对象应为Optional，操作符即可用Lambda
+.sorted(comparing())
+.mapToInt() 返回IntStream
+.boxed() 装箱
+.mapToObj 对象流
+.iterate() 遍历
+.groupingBy() 分组
+
+- 数据类型
+同样避免装箱拆箱操作，有IntStream等选择
+
+
+- `生成List`
+
+```
+List<Integer> list=Stream.iterate(1,i->i+1)
+                        .limit(10)
+                        .collect(Collectors.toList());
+```
+
+- `reduce`
+对函数进行操作，返回Optional<T>的结果
+
+```
+stream.reduce(Integer::sum);
+```
+
+    这里应注意，当你想在static void main()中使用lambda时，使用的函数必须是static注释的，所以类似一些String::method是不能使用的.
+
+- `sort`
+生成List后，直接.sort();
+ -  sort
+    - [x] Function
+    - [x] Function,Comparator
+若是选择前者，则以默认的排序方法进行
+
+- Function<T,R> -- R apply(T);
+    核心是接受类型为T的data，进行操作后返回类型为R的result；
+
+- Comparator<T> -- int compare(T o1,T 02);
+> 接受类型为T的data，进行compare操作，返回正数，负数，0对应><=
+
+> >  可用a.compareTo(b)
+
+> >  ((Comparable)a).compareTo(b)
+
+> >  Comparator.naturalOrder()
+
+> >  String::compareTo
+
+```
+List<Integer> result= Arrays.asList(1,2,5,3,6,2,0,35,34,4,6);
+		result.sort(Comparator.comparing(t -> t, (a, b) -> ((Comparable)a).compareTo(b)));
+		System.out.println(result);
+```
