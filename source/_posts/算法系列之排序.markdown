@@ -1,3 +1,4 @@
+---
 title: 算法系列之排序
 author: tyrantqiao
 tags:
@@ -5,8 +6,9 @@ tags:
   - 排序
 categories: []
 copyright: true
-date: 2018-08-05 14:12:00
 toc: true
+abbrlink: 96be4c5
+date: 2018-08-05 14:12:00
 ---
 
 # algorithms

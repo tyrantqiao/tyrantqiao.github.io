@@ -1,11 +1,13 @@
+---
 title: JDK8学习，特性以及源码
 author: tyrantqiao
 tags:
   - java
 categories: []
-date: 2018-08-05 13:59:00
 copyright: true
 toc: true
+abbrlink: 58254cc4
+date: 2018-08-05 13:59:00
 ---
 java8的一些新特性：
 

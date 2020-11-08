@@ -1,13 +1,15 @@
+---
 title: 动手写mybatis
 author: tyrantqiao
 tags:
-- java
-- mybatis
-- 源码
+  - java
+  - mybatis
+  - 源码
 categories: []
-date: 2019-04-28 10:52:00
 copyright: true
 toc: true
+abbrlink: 7ceed006
+date: 2019-04-28 10:52:00
 ---
 
 # mybatis

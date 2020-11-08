@@ -1,3 +1,4 @@
+---
 title: HttpTCP系列第一章
 author: tyrantqiao
 categories: []
@@ -7,6 +8,7 @@ tags:
   - HTTP
   - TCP
   - 学习笔记
+abbrlink: a83aadec
 date: 2018-10-18 09:14:00
 ---
 

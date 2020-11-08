@@ -1,11 +1,13 @@
+---
 title: Linux常见配置
 author: tyrantqiao
 tags:
   - Linux
 categories: []
-date: 2018-08-05 14:04:00
 copyright: true
 toc: true
+abbrlink: f873dfb4
+date: 2018-08-05 14:04:00
 ---
 You have to make your server or linux safer,u might find such log text like below:
 There were xx times failed login until the last successful login
@@ -51,3 +53,4 @@ like a family put their valuables on the front door and hope no one will stole i
       -->utmp  (current)
    (check who login your machine)
 ```
+

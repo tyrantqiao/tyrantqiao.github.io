@@ -1,3 +1,4 @@
+---
 title: Unity+java简单登入注册实现
 author: tyrantqiao
 tags:
@@ -6,9 +7,10 @@ tags:
   - unity
   - mysql
 categories: []
-date: 2018-08-05 14:09:00
 copyright: true
 toc: true
+abbrlink: d94f7717
+date: 2018-08-05 14:09:00
 ---
 实现条件：MySQL+Spring+Unity
 

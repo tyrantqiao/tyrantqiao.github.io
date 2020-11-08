@@ -1,12 +1,14 @@
+---
 title: python学习笔记
 author: tyrantqiao
 tags:
   - python
   - 爬虫
 categories: []
-date: 2018-08-05 14:05:00
 copyright: true
 toc: true
+abbrlink: 743c31e9
+date: 2018-08-05 14:05:00
 ---
 
 # python

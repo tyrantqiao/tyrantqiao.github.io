@@ -1,11 +1,13 @@
+---
 title: JDK配置
 author: tyrantqiao
 tags:
-- java
+  - java
 categories: []
-date: 2018-08-05 14:01:00
 copyright: true
 toc: true
+abbrlink: ddb8f3d2
+date: 2018-08-05 14:01:00
 ---
 
 # JDK

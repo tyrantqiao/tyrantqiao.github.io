@@ -1,11 +1,13 @@
+---
 title: shadowsocks一些解决方案
 author: tyrantqiao
 tags:
   - shadowsocks
 categories: []
-date: 2018-08-05 14:07:00
 copyright: true
 toc: true
+abbrlink: 537d286d
+date: 2018-08-05 14:07:00
 ---
 if your shadowsocks is very slow,and this is not your net's wrong.
 You can try the below tests to fast your ss.

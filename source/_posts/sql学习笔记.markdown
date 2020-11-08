@@ -1,11 +1,13 @@
+---
 title: Mysql学习笔记
 author: tyrantqiao
 tags:
-- mysql
+  - mysql
 categories: []
-date: 2018-08-05 14:05:00
 copyright: true
 toc: true
+abbrlink: 7f3b056
+date: 2018-08-05 14:05:00
 ---
 # mysql
 
@@ -105,4 +107,15 @@ skip-grant-tables
 ``` sql
 grant all privileges on *.* to 'root'@'%' INDETIFIED BY 'password' WITH GRANT OPTION;
 flush privileges;
+```
+
+## sql
+
+### time_format()
+
+[参考这里](https://www.w3schools.com/sql/func_mysql_date_format.asp)
+
+```sql
+# 分钟是%i 具体规则上网百度吧 
+select DATE_FORMAT(time_column,"%Y %m %d %h %i %s")
 ```

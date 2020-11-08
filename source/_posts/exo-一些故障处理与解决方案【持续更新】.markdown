@@ -1,11 +1,13 @@
+---
 title: hexo 一些故障处理与解决方案【持续更新】
 author: tyrantqiao
 tags:
-- hexo
-- bug
+  - hexo
+  - bug
 categories: []
 copyright: true
 toc: true
+abbrlink: f2da8e98
 date: 2018-10-16 14:00:00
 ---
 

@@ -2,11 +2,12 @@
 title: Java面试题测试，你掌握了吗
 author: tyrantqiao
 toc: true
-date: 2018-11-22 16:24:36
 copyright: true
 tags:
-- 面试
-- java
+  - 面试
+  - java
+abbrlink: b4cb1e3d
+date: 2018-11-22 16:24:36
 ---
 
 # 面试题目类型

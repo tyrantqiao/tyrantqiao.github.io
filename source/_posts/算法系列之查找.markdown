@@ -1,12 +1,14 @@
+---
 title: 算法系列之查找
 author: tyrantqiao
 tags:
   - 算法
   - 查找
 categories: []
-date: 2018-08-05 14:11:00
 copyright: true
 toc: true
+abbrlink: 9ee441bc
+date: 2018-08-05 14:11:00
 ---
 
 # 查找篇

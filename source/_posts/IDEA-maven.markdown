@@ -2,11 +2,12 @@
 title: IDEA-maven
 author: tyrantqiao
 toc: true
-date: 2019-01-05 10:35:26
 copyright: true
 tags:
-- IDEA
-- maven
+  - IDEA
+  - maven
+abbrlink: 3aac567e
+date: 2019-01-05 10:35:26
 ---
 
 # IDEA-MAVEN

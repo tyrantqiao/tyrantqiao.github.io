@@ -1,3 +1,4 @@
+---
 title: git详解【使用以及原理】
 author: tyrantqiao
 tags:
@@ -6,6 +7,7 @@ tags:
 categories: []
 toc: true
 copyright: true
+abbrlink: 34b0f784
 date: 2018-09-14 10:59:00
 ---
 
@@ -47,11 +49,11 @@ date: 2018-09-14 10:59:00
 
 ![git流程](git详解【使用以及原理】/gitProcess.jpg)
 
-### 使用【安装略】
+### 配置使用【安装略】
 
 - git设置email以及name内容
 
-``` git
+```git
 git config --global user.name "tyrantqiao"
 git config --global user.email "tyrantqiao@email.com"
 # 这句语句会将你输入的账号密码存下来，若是在Windows系统中还会作为凭据存储下来，当需要删除时需要在Windows的凭据管理器中进行删除。
@@ -63,6 +65,8 @@ git config --global credential.helper store
 
 若不用global则设定保存在当前项目的.git/config下
 
+### git日志和提交
+
 - 查看提交情况
 
 `git log -p -2 --stat --pretty`
@@ -70,6 +74,15 @@ git config --global credential.helper store
 - 修改最后一次更改情况
 
 `git commit --amend`
+
+- 查看日志文件
+
+`git show --name-status hash_id`
+
+- 回退提交commit
+
+`git reset --soft hash_id`
+> 回退到，并将修改存入暂存区
 
 ### git存储数据
 

@@ -1,3 +1,4 @@
+---
 title: git详解【使用以及原理】
 author: tyrantqiao
 tags:
@@ -5,8 +6,9 @@ tags:
   - 学习笔记
 categories: []
 toc: true
-date: 2018-09-14 10:59:00
 copyright: true
+abbrlink: 34b0f784
+date: 2018-09-14 10:59:00
 ---
 
 # git
@@ -58,6 +60,11 @@ git config --global user.email "tyrantqiao@email.com"
 
 `git log -p -2 --stat --pretty`
 
+- 按照文件名的形式查看
+
+`git log`
+`git show --name-status hash_id`
+
 - 修改最后一次更改情况
 
 `git commit --amend`
@@ -80,3 +87,22 @@ git config --global user.email "tyrantqiao@email.com"
 - 分支模式种类
   - 长期分支： 拥有多个开放的分支，各个分支负责特定的任务，对于大型项目时这种易于管理，像可以分为基础，前端，后端，bug分支等等。
   - 特性分支【topic】：一个短期的，用来实现单一特性与其相关工作的分支，可以理解为一个任务的多种实现，然后在其中抉择较好的任务进行选择。
+
+### 冲突解决以及什么是merge
+
+- 冲突
+> 简单来说就是线上git仓库与本地git仓库在一些代码上有冲突的地方【都有改动】，而git无法得知哪种是正确的，所以git会爆出需要解决冲突
+
+常见情况：
+1. v1->v2->v3->   【有问题的v4】，然后主环境回退到v3，开发人员对v4进行修复bug，建立了v4->hotfix，完成修复后，merge master指针和hotfix，再后面将分支合并回来。
+2. 或者像提交前忘记拉代码，git自动做了merge操作，因为开发上不涉及到冲突操作，所以常发生merge操作
+
+那么冲突呢？
+1. 添加时勿将别人的代码添加进去，像格式化等都会导致文件的变化。
+2. 公共代码的修改，大家的版本不一致导致冲突
+
+解决方案：
+1. 备份本地代码，删除掉git仓库内代码，拉取最新的代码，并添加上自己的内容上去。
+2. 使用git工具，快速将线上的代码依次合并上本地代码内来解决冲突，IDEA等可以实现
+3. 线上的不要了，那就将本地的代码直接push上去
+

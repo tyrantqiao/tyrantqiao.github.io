@@ -1,3 +1,4 @@
+---
 title: leetcode题目详细解答【java版】持续更新
 author: tyrantqiao
 toc: true
@@ -5,8 +6,9 @@ tags:
   - 算法
   - java
 categories: []
-date: 2018-10-18 14:42:00
 copyright: true
+abbrlink: 96d7c0a1
+date: 2018-10-18 14:42:00
 ---
 
 # leetcode题经

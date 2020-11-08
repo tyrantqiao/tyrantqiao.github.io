@@ -1,10 +1,12 @@
+---
 title: zookeeper学习笔记之一
 author: tyrantqiao
 toc: true
-date: 2019-01-08 11:39:58
 copyright: true
 tags:
-- 中间件
+  - 中间件
+abbrlink: 79c20534
+date: 2019-01-08 11:39:58
 ---
 
 # zookeeper

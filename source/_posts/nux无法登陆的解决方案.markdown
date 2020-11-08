@@ -1,11 +1,13 @@
+---
 title: Linux无法登陆的解决方案
 author: tyrantqiao
 tags:
   - linux
 categories: []
-date: 2018-08-05 14:03:00
 copyright: true
 toc: true
+abbrlink: b4d874f1
+date: 2018-08-05 14:03:00
 ---
 
 # sshd_config

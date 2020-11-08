@@ -1,3 +1,4 @@
+---
 title: (JDK11)类加载源码以及面试题
 author: tyrantqiao
 tags:
@@ -7,6 +8,7 @@ tags:
 categories: []
 copyright: true
 toc: true
+abbrlink: e2c80eed
 date: 2018-10-23 22:50:00
 ---
 

@@ -1,11 +1,13 @@
+---
 title: Linux常用指令及介绍
 author: tyrantqiao
 tags:
-- linux
+  - linux
 categories: []
-date: 2019-05-19 14:03:00
 copyright: true
 toc: true
+abbrlink: 28f5ba0a
+date: 2019-05-19 14:03:00
 ---
 
 # Linux

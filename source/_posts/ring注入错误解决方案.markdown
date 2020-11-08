@@ -1,12 +1,14 @@
+---
 title: spring注入错误解决方案
 author: tyrantqiao
 tags:
   - java
   - spring
 categories: []
-date: 2018-08-05 14:07:00
 copyright: true
 toc: true
+abbrlink: 5bfe94f
+date: 2018-08-05 14:07:00
 ---
 `怎么设置autowired`
 

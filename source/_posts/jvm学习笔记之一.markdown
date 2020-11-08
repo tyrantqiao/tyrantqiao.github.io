@@ -2,12 +2,13 @@
 title: jvm学习笔记之一
 author: tyrantqiao
 toc: true
-date: 2018-12-19 21:16:23
 copyright: true
 tags:
-- java
-- jvm
-- 学习笔记
+  - java
+  - jvm
+  - 学习笔记
+abbrlink: 84c762
+date: 2018-12-19 21:16:23
 ---
 # JVM
 

@@ -1,12 +1,11 @@
+---
 title: 健身
 toc: true
-date: 2018-09-16 20:01:33
-# password: Tyrant
-# abstract: Welcome to my blog, enter password to read.
-# message: Welcome to my blog, enter password to read.
 copyright: true
 tags:
-- 随笔 
+  - 随笔
+abbrlink: f9a7e6cd
+date: 2018-09-16 20:01:33
 ---
 
 # 健身

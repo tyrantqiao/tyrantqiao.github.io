@@ -1,3 +1,4 @@
+---
 title: 旅游杂谈-泰国
 author: tyrantqiao
 categories: []
@@ -6,6 +7,7 @@ copyright: true
 tags:
   - 随笔
   - 旅游
+abbrlink: 6ad518ea
 date: 2019-04-21 09:44:00
 ---
 

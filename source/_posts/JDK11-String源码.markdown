@@ -1,3 +1,4 @@
+---
 title: JDK11-String源码
 author: tyrantqiao
 tags:
@@ -6,8 +7,9 @@ tags:
   - 源码
 categories: []
 toc: true
-date: 2018-10-23 22:56:00
 copyright: true
+abbrlink: 1102da6f
+date: 2018-10-23 22:56:00
 ---
 
 # 使用版本:JDK10.0.1

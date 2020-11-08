@@ -1,11 +1,12 @@
 ---
 title: django后台的搭建
-date: 2019-07-11 23:40:47
-tags:
 author: tyrantqiao
 categories: []
 toc: true
 copyright: true
+abbrlink: 65c39c1a
+date: 2019-07-11 23:40:47
+tags:
 ---
 
 # django后台

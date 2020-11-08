@@ -2,11 +2,12 @@
 title: 面试测评常考的图像推理，如何推理解答呢！？
 author: tyrantqiao
 toc: true
-date: 2018-10-24 21:11:31
 copyright: true
 tags:
-    - 面试
-    - 数学
+  - 面试
+  - 数学
+abbrlink: d3485a1e
+date: 2018-10-24 21:11:31
 ---
 
 # 数学推理题目

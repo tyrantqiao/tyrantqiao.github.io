@@ -1,3 +1,4 @@
+---
 title: hexo构建，配置，插件
 author: tyrantqiao
 tags:
@@ -5,12 +6,18 @@ tags:
   - ssh
   - blog
 categories: []
-date: 2018-08-05 13:58:00
 copyright: true
 toc: true
+abbrlink: 75c31e69
+date: 2018-08-05 13:58:00
 ---
 
 # hexo
+
+## 快速安装
+
+- 执行下面安装指令
+- 下载[package.json](https://raw.githubusercontent.com/tyrantqiao/tyrantqiao.github.io/src/package.json) 然后执行命令`npm install`或者`yarn add`安装相关的插件
 
 ## 需要安装
 
@@ -18,16 +25,37 @@ toc: true
   - Node.js
   - hexo
 
-### 安装指令
+### 安装指令【必须执行】
 
 > 通过yarn或者npm安装，推荐使用yarn，下载速度比npm稳定而且快太多了
 
 ``` bash
-npm install hexo-cli --save
-yarn add hexo-cli --save 
+npm install hexo-cli -g
+yarn global add hexo-cli
 ```
 
 ## 让hexo变得更好用
+
+### 设置新建文件模板
+
+```code
+|--scaffolds
+|______draft.md
+|______page.md
+|______post.md
+```
+
+创建时执行命令 `hexo new/n post/page "post_name"`即可
+
+```code
+# 注意这里要保证---、---的解析格式，不然的话会解析报错的。
+---
+tags:
+author:
+---
+```
+
+```
 
 ### hexo插件
 
@@ -117,4 +145,20 @@ st->op1->op2->e
 tags:
 - sdd
 - ddd
+```
+
+### 序列图
+
+```sequence
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!
+```
+
+```code
+  ```sequence
+  Alice->Bob: Hello Bob, how are you?
+  Note right of Bob: Bob thinks
+  Bob-->Alice: I am good thanks!
+  \```
 ```

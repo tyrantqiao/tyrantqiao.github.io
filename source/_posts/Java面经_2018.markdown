@@ -1,15 +1,16 @@
 ---
 title: Java面经_2018
 author: tyrantqiao
-categories: 
-- java
-- 面经
+categories:
+  - java
+  - 面经
 toc: true
 copyright: true
-date: 2018-08-05 14:13:00
 tags:
-- 面经
-- java
+  - 面经
+  - java
+abbrlink: eb87f5f
+date: 2018-08-05 14:13:00
 ---
 
 # 面试公司

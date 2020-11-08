@@ -14,8 +14,17 @@ timezone:
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://tyrantqiao.github.io
 root: /
-permalink: :year/:month/:day/:title/
+# permalink: :year/:month/:day/:title/
+# permalink_defaults:
+
+# permalink: :title/
+permalink: archives/:author_name/:abbrlink/:title/
+abbrlink:
+  alg: crc32  # 算法：crc16(default) and crc32
+  rep: hex    # 进制：dec(default) and hex
 permalink_defaults:
+  author_name: tyrantqiao
+
 
 # Directory
 source_dir: source
@@ -126,7 +135,7 @@ deploy:
   - type: git
     repo: git@github.com:tyrantqiao/tyrantqiao.github.io.git
     branch: src
-    message: 尝试备份
+    message: 备份更改博客链接名的操作
     extend_dirs: /
     ignore_hidden: false
     ignore_pattern:
@@ -140,12 +149,33 @@ deploy:
   #   ignore_pattern:
   #       public: .
 
+sequence:
+  # webfont:     # optional, the source url of webfontloader.js
+  # snap:        # optional, the source url of snap.svg.js
+  # underscore:  # optional, the source url of underscore.js
+  # sequence:    # optional, the source url of sequence-diagram.js
+  # css: # optional, the url for css, such as hand drawn theme 
+  options: 
+    theme: 
+    css_class: 
+
 flowchart:
   # raphael:   # optional, the source url of raphael.js
   # flowchart: # optional, the source url of flowchart.js
   options: # options used for `drawSVG`
 
+# 外部链接优化
+nofollow:
+    enable: true
+    exclude:     # 例外的链接，可将友情链接放置此处
+    - 'https://github.com/tyrantqiao'
+    - 'https://www.facebook.com/TyrantQiao'
+    - 'https://www.linkedin.com/in/%E9%BB%84-%E4%B9%94%E9%91%AB-a44179161/'
+    - 'http://litten.me/'
+
+
 # 给每个文章做140的摘抄
+# 主要做rss的信息聚合
 feed:
   type: atom
   path: atom.xml

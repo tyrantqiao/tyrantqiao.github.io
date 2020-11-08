@@ -1,0 +1,241 @@
+---
+title: 执行计划详解
+copyright: true
+toc: true
+author: tyrantqiao
+categories: []
+abbrlink: 2d16d9d3
+date: 2020-08-09 00:12:34
+tags:
+---
+
+# 执行计划
+
+- `explain select ....` 对于drds时是展示分库信息
+- `explain execute  select ....` 对于drds是展示执行计划
+    - drds只能看到select的执行计划，对于其他语句，将相关内容改为select进行解读就好
+
+```sql
+explain select id from test_no_index;
+-- 查看执行计划
++----+-------------+---------------+------------+-------+---------------+-----+---------+--------+------+----------+-------------+
+| id | select_type | table         | partitions | type  | possible_keys | key | key_len | ref    | rows | filtered | Extra       |
++----+-------------+---------------+------------+-------+---------------+-----+---------+--------+------+----------+-------------+
+| 1  | SIMPLE      | test_no_index | <null>     | index | <null>        | id  | 4       | <null> | 1    | 100.0    | Using index |
++----+-------------+---------------+------------+-------+---------------+-----+---------+--------+------+----------+-------------+
+
+explain select id from test_index;
++----+-------------+------------+------------+-------+---------------+---------+---------+--------+--------+----------+-------------+
+| id | select_type | table      | partitions | type  | possible_keys | key     | key_len | ref    | rows   | filtered | Extra       |
++----+-------------+------------+------------+-------+---------------+---------+---------+--------+--------+----------+-------------+
+| 1  | SIMPLE      | test_index | <null>     | index | <null>        | PRIMARY | 4       | <null> | 498385 | 100.0    | Using index |
++----+-------------+------------+------------+-------+---------------+---------+---------+--------+--------+----------+-------------+
+```
+
+## 执行计划解读
+
+| 字段 | 作用 | 关注点 |
+| --- | --- | --- |
+| id  | 执行顺序，id值越大，越先执行，null时表结果集，用于union等查询语句 | |
+| select_type | sql的查询类型（无子查询、from中查询···） | 关注不同部分的执行计划 |
+| table | 表名称 | 对于drds这类中间件来说，可能为rds分库或者drds层名称 | 
+| partitions | 分区（创建表时指定的分表列信息） | 关注sql对于分库的查询 |
+| type | 怎么查的（全表、索引、range、子查询中用ref、const（主键索引or唯一索引）、full_text等 | 关注使用到的索引是什么类型的，能不能优化使用的索引类型。  |
+| possible_keys | 可能用到的索引 | 
+| key | 使用到的索引，是上者的子集合 | 此处关注索引类型 |
+| key_len | 索引长度 | 关注索引长度 len=charType+length+1(允许null)+2（变长列）
+| ref | 表示上述表的连接匹配条件 | 若用等值等数查询，此处为const。如果为连接查询，被驱动表的执行计划显示驱动表的关联字段，若为表达式or函数，则此处为func|
+| rows | 扫描行数 | 通常情况下,rows越小,效率越高 |
+| filtered | 结果集占查询数据量的比 | 
+| extra | 额外信息（using index 使用覆盖索引）（using where 使用where子句过滤结果集）|
+
+### 对于上面每个字段的详细解读
+
+```sql
+-- 建表语句
+CREATE TABLE `test_index` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `a` varchar(20) DEFAULT NULL,
+  `b` tinyint(3) DEFAULT NULL,
+  `c` varchar(4) DEFAULT NULL,
+  `d` tinyint(4) DEFAULT NULL,
+  `e` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_a` (`a`),
+  KEY `idx_id_b` (`id`,`b`)
+) ENGINE=InnoDB AUTO_INCREMENT=500001 DEFAULT CHARSET=utf8
+```
+
+- select_type
+    - SIMPLE 简单的select语句（不使用union或者子查询）
+    ```sql
+    explain  select * from test_index;
+    ```
+    | id | select\_type | table | partitions | type | possible\_keys | key | key\_len | ref | rows | filtered | Extra |
+    | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+    | 1 | SIMPLE | test\_index | NULL | ALL | NULL | NULL | NULL | NULL | 498375 | 100 | NULL |
+    - PRIMARY 最外层查询
+    - SUBQUERY 第一个子查询语句
+    ```sql
+    explain select * from test_index where id = (select id from test_index limit 1);
+    ```
+    | id | select\_type | table | partitions | type | possible\_keys | key | key\_len | ref | rows | filtered | Extra |
+    | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+    | 1 | PRIMARY | test\_index | NULL | const | PRIMARY,idx\_id\_b | PRIMARY | 4 | const | 1 | 100 | NULL |
+    | 2 | SUBQUERY | test\_index | NULL | index | NULL | idx\_id\_b | 6 | NULL | 498375 | 100 | Using index |
+    - UNION
+    - union result 结果
+    ```sql
+    explain
+    select id
+    from test_index
+    union
+    select id
+    from student;
+    ```
+    
+    | id | select\_type | table | partitions | type | possible\_keys | key | key\_len | ref | rows | filtered | Extra |
+    | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+    | 1 | PRIMARY | test\_index | NULL | index | NULL | idx\_id\_b | 6 | NULL | 498375 | 100 | Using index |
+    | 2 | UNION | student | NULL | index | NULL | idx\_a | 9 | NULL | 1 | 100 | Using index |
+    | NULL | UNION RESULT | &lt;union1,2&gt; | NULL | ALL | NULL | NULL | NULL | NULL | NULL | NULL | Using temporary |
+    - DEPENDENT UNION union语句，但是执行结果依赖外部查询
+    - DEPENDENT SUBQUERY 执行结果依然外面的子查询
+    ```sql
+    explain
+    select id
+    from test_index begin where id in (
+        select id from test_index
+    union
+    select id
+    from student where a=begin.a);
+    ```
+    | id | select\_type | table | partitions | type | possible\_keys | key | key\_len | ref | rows | filtered | Extra |
+    | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+    | 1 | PRIMARY | begin | NULL | index | NULL | idx\_a | 63 | NULL | 498375 | 100 | Using where; Using index |
+    | 2 | DEPENDENT SUBQUERY | test\_index | NULL | eq\_ref | PRIMARY,idx\_id\_b | PRIMARY | 4 | func | 1 | 100 | Using index |
+    | 3 | DEPENDENT UNION | student | NULL | eq\_ref | PRIMARY,idx\_a | PRIMARY | 4 | func | 1 | 100 | Using where |
+    | NULL | UNION RESULT | &lt;union2,3&gt; | NULL | ALL | NULL | NULL | NULL | NULL | NULL | NULL | Using temporary |
+    
+    - DERIVED 派生表，本质上就是`select ** from (xxx) T;`
+    > 实际上是一种特殊的subQuery，位于sql语句中的from子句中，可以看做是一张表，5.7之前处理为对Derived table进行Materialize，生成临时表保存结果，然后利用临时表协助完成其他父查询操作。
+    > 5.7 允许将符合条件的Derived table中的字表与父查询表合并直接join
+    
+- table 表名称
+- type join type
+    - system 表只有一行(系统表也是)，这也是一种典型的const join方式
+    - const 查询条件中的表只有一行匹配的，查询最快因为只读取一次
+    ```sql
+    -- 根据主键ID查询只有一行
+    explain
+    select *
+    from test_index
+    where id = 1;
+    ```
+    | id | select\_type | table | partitions | type | possible\_keys | key | key\_len | ref | rows | filtered | Extra |
+    | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+    | 1 | SIMPLE | test\_index | NULL | const | PRIMARY,idx\_id\_b | PRIMARY | 4 | const | 1 | 100 | NULL |
+    
+    - eq_ref 从查询表中只取出一条进行联结，可能是最好的join联结方式，使用的索引是主键、非空的唯一索引。
+    ```sql
+    -- 使用主键id进行关联
+    explain
+    select *
+    from test_index inner join student s on test_index.id =s.id;
+    ```
+    
+    | id | select\_type | table | partitions | type | possible\_keys | key | key\_len | ref | rows | filtered | Extra |
+    | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+    | 1 | SIMPLE | s | NULL | ALL | PRIMARY | NULL | NULL | NULL | 1 | 100 | NULL |
+    | 1 | SIMPLE | test\_index | NULL | eq\_ref | PRIMARY,idx\_id\_b | PRIMARY | 4 | learn.s.id | 1 | 100 | NULL |
+    
+    - ref 所有匹配条件的索引值用来进行联结，索引使用的是二级索引，如果查询只是匹配了一小部分行，这是一种好的查询方式。
+    ```sql
+    explain
+    select *
+    from test_index inner join student s on test_index.a =s.a;
+    ```
+
+    | id | select\_type | table | partitions | type | possible\_keys | key | key\_len | ref | rows | filtered | Extra |
+    | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+    | 1 | SIMPLE | s | NULL | ALL | idx\_a | NULL | NULL | NULL | 1 | 100 | Using where |
+    | 1 | SIMPLE | test\_index | NULL | ref | idx\_a | idx\_a | 63 | learn.s.a | 1 | 100 | Using index condition |
+
+    - fulltext 使用全文索引
+    > 5.6及以后引入全文索引，针对char、varchar、text及其系列建立全文索引
+    ```sql
+    alter table test_index add fulltext key(a,c);
+
+    select * from test_index where match(a,c) against('IyvECYO1uevFInzB5v4J dM77');
+    ```
+
+    | id | a | b | c | d | e |
+    | :--- | :--- | :--- | :--- | :--- | :--- |
+    | 1 | IyvECYO1uevFInzB5v4J | 11 | WKMw | 100 | BHwlX |
+    | 2 | EbQwRCmLzqeKQPtGTeiC | 98 | dM77 | 96 | EZP1s |
+    | 67640 | 1Q3wiMOAjD7tUVJJiaLa | 24 | dM77 | 96 | DWDcX |
+    | 111582 | cvL8csv2wiKH7lbIQX3h | 97 | dM77 | 99 | Mxeo7 |
+    | 471214 | CVDhhp1JtYkyBd6I5ang | 97 | dM77 | 101 | QRBfj |
+
+    | id | select\_type | table | partitions | type | possible\_keys | key | key\_len | ref | rows | filtered | Extra |
+    | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+    | 1 | SIMPLE | test\_index | NULL | fulltext | a | a | 0 | const | 1 | 100 | Using where; Ft\_hints: sorted |
+    
+    - ref_or_null
+     
+
+
+
+
+
+> 附索引类型的执行效率：`all<index<range<ref<eq_ref<const<system`
+
+### 重点关注项
+
+- type 本次查询表链接类型
+- key 最终选择的索引
+- ken_len 本次查询用于结果过滤的索引实际长度（关注字段类型越短越好）
+- rows 扫描行数
+- extra 确认有无出现
+  - Using filesort  
+    > MySQL must do an extra pass to find out how to retrieve the rows in sorted order. The sort is done by going through all rows according to the join type and storing the sort key and pointer to the row for all rows that match the WHERE clause.
+    ```sql
+        CREATE TABLE `test_index`
+      (
+          `id` int(11) not null auto_increment,
+          `a`  varchar(20),
+          `b`  tinyint(3),
+          `c`  varchar(4),
+          d    tinyint,
+          e    varchar(5),
+          primary key (id)
+      ) ENGINE = InnoDB
+        DEFAULT CHARSET = utf8;
+      alter  table test_index add index idx(b);
+      alter table test_index add index idx_c(c);
+      explain select * from test_index where b=3 order by c ;
+    ```
+
+    当查询的条件与order by条件不一致时，先根据索引查出来值，然后再根据另外的值进行排序，也就是using filesort
+    ```sql
+    +----+-------------+------------+------------+------+---------------+-----+---------+-------+------+----------+---------------------------------------+
+    | id | select_type | table      | partitions | type | possible_keys | key | key_len | ref   | rows | filtered | Extra                                 |
+    +----+-------------+------------+------------+------+---------------+-----+---------+-------+------+----------+---------------------------------------+
+    | 1  | SIMPLE      | test_index | <null>     | ref  | idx           | idx | 2       | const | 4506 | 100.0    | Using index condition; Using filesort |
+    +----+-------------+------------+------------+------+---------------+-----+---------+-------+------+----------+---------------------------------------+
+    ```
+
+    解决方法：添加联合索引idx_b_c(b,c)
+    ```sql
+    alter table test_index add index idx_b_c(b,c);
+    +----+-------------+------------+------------+------+---------------+---------+---------+-------+------+----------+-----------------------+
+    | id | select_type | table      | partitions | type | possible_keys | key     | key_len | ref   | rows | filtered | Extra                 |
+    +----+-------------+------------+------------+------+---------------+---------+---------+-------+------+----------+-----------------------+
+    | 1  | SIMPLE      | test_index | <null>     | ref  | idx,idx_b_c   | idx_b_c | 2       | const | 4506 | 100.0    | Using index condition |
+    +----+-------------+------------+------------+------+---------------+---------+---------+-------+------+----------+-----------------------+
+    ```
+  - Using temporary 需要创建一个临时表来存储结果，这通常发生在对没有索引的列进行GROUP BY时，或者ORDER BY里的列不都在索引里
+  - Using index 覆盖索引
+  - Using where 通常是进行了全表引扫描后再用WHERE子句完成结果过滤
+  - Impossible WHERE 对Where子句判断的结果总是false而不能选择任何数据，例如where 1=0，无需过多关注
+  - Select tables optimized away 使用某些聚合函数来访问存在索引的某个字段时，优化器会通过索引直接一次定位到所需要的数据行完成整个查询，例如MIN()\MAX() 

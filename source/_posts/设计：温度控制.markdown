@@ -1,12 +1,14 @@
+---
 title: 课程设计：温度控制
 author: tyrantqiao
 tags:
   - c
   - 课程设计
 categories: []
-date: 2018-08-05 14:11:00
 copyright: true
 toc: true
+abbrlink: 317beb09
+date: 2018-08-05 14:11:00
 ---
 
 # 课程设计

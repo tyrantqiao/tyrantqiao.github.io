@@ -1,12 +1,14 @@
+---
 title: ssh-key构建以及连接github操作
 author: tyrantqiao
 tags:
-- ssh
-- git
+  - ssh
+  - git
 categories: []
-date: 2018-08-05 13:55:00
 copyright: true
 toc: true
+abbrlink: 35729c7e
+date: 2018-08-05 13:55:00
 ---
 
 # ssh【Secure Shell】
@@ -47,7 +49,17 @@ toc: true
 
 - How to connect to github by ssh:
 
-``` bash
+```flow
+st=>start: start
+ed=>end: end
+makeSSHKey=>operation: 生成ssh钥
+addToGithub=>operation: 添加公钥到github中
+connectToGithub=>operation: 连接到github ssh -T git@github.com
+
+st->makeSSHKey->addToGithub->connectToGithub->ed
+```
+
+```bash
 # 这里回车两次，不设置密令，同时这里可以设置生成路径以及密钥名字
 ssh-keygen -t rsa -C "yourEmail"
 # eval $(ssh-agent -s)等同于下面两句
@@ -88,3 +100,16 @@ ssh -T git@github.com
   > 显示所有key
   - `ssh-add -D`
   > 清除所有key
+
+### 如何不再重复设置ssh-key
+
+```bash
+# 本地的ssh目录
+cd ~/.ssh
+# 生成ssh key
+ssh-keygen -t rsa -C "tyrantqiao@gmail.com"
+# 打印公钥 将公钥添加到github中
+cat id_rsa.pub
+# 连接github
+ssh -T git@github.com
+```

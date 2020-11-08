@@ -1,11 +1,13 @@
+---
 title: Ipython使用
 author: tyrantqiao
 tags:
   - python
 categories: []
-date: 2018-08-05 14:01:00
 copyright: true
 toc: true
+abbrlink: 1f0cdaae
+date: 2018-08-05 14:01:00
 ---
 If you download python2 and python3 together.
 Make sure the ipython use the same version (It is recommend that the latest ipython as many packages suit for python3.

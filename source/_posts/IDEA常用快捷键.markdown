@@ -1,3 +1,4 @@
+---
 title: IDEA技巧【快捷键、插件等】
 author: tyrantqiao
 tags:
@@ -6,8 +7,47 @@ tags:
 categories: []
 copyright: true
 toc: true
+abbrlink: 4e77c9d4
 date: 2018-08-05 14:00:00
 ---
+
+***
+> 更新于2020年2月5日17:42:03，主要是更新了工作中比较实用的东西，搭配了IDEA-VIM
+
+- `shift+shift` to anywhere（搜索）
+- `ctrl+F/B` 向前/后翻页 vim
+- `G/ g+g` 底部/头部 vim
+- `ctrl+w v` 窗口左右切割 vim
+- `:set nu`  `:set nonu` 设置行号/不设置 
+- `:%s/target/replaceString/replaceFlag` 
+  - replaceFlag： g 全局
+- `n/N` 下个/上个搜索区域 vim
+- `$/O` 行尾/行头
+- `u/ctrl+r` 撤销/恢复操作
+- `ctrl+shift+A` find action
+
+IDEA自动补全功能：
+
+- `"abcde".var` 与 `obj.var` 声明new语句
+- `obj.null` 与 `obj.notNull` 与 `obj.nn` 声明判空语句
+- `obj.for` 与 `obj.fori` 带索引
+- `obj.a>0` 与 `obj.cast` if语句以及转型方法
+
+vim记录命令的方法
+
+```vim
+# 记录到x缓存（寄存器）中
+qx 
+cmd1
+cmd2
+# ···
+q
+
+# 使用时用@x即可
+@q
+```
+
+***
 
 # 常用的快捷键
 

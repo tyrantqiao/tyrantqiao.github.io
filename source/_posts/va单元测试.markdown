@@ -1,12 +1,14 @@
+---
 title: java单元测试
 author: tyrantqiao
 tags:
-- test
-- java
+  - test
+  - java
 categories: []
-date: 2018-08-05 14:02:00
 copyright: true
 toc: true
+abbrlink: ae68e151
+date: 2018-08-05 14:02:00
 ---
 
 - @Test -- 转为测试method
