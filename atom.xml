@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>暴君乔博客</title>
+  
+  <subtitle>Coding my life, Love</subtitle>
+  <link href="http://tyrantqiao.com/atom.xml" rel="self"/>
+  
+  <link href="http://tyrantqiao.com/"/>
+  <updated>2024-06-24T15:36:44.000Z</updated>
+  <id>http://tyrantqiao.com/</id>
+  
+  <author>
+    <name>tyrantqiao</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>jvm技术要点</title>
+    <link href="http://tyrantqiao.com/archives/baa354c8/"/>
+    <id>http://tyrantqiao.com/archives/baa354c8/</id>
+    <published>2024-06-24T15:36:44.000Z</published>
+    <updated>2024-06-24T15:36:44.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;技术实现&quot;&gt;&lt;a href=&quot;#技术实现&quot; class=&quot;headerlink&quot; title=&quot;技术实现&quot;&gt;&lt;/a&gt;技术实现&lt;/h1&gt;&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    
+    <category term="java" scheme="http://tyrantqiao.com/tags/java/"/>
+    
+    <category term="面试" scheme="http://tyrantqiao.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+    <category term="jvm" scheme="http://tyrantqiao.com/tags/jvm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis技术要点</title>
+    <link href="http://tyrantqiao.com/archives/ea18a0c8/"/>
+    <id>http://tyrantqiao.com/archives/ea18a0c8/</id>
+    <published>2024-05-19T11:50:42.000Z</published>
+    <updated>2024-05-19T11:50:42.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Redis 高效的内存数据库&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为什么 redis 那么快&lt;ul&gt;
+&lt;li&gt;纯内存模型&lt;/li&gt;
+&lt;li&gt;基于 Reactor 模式设计了时间处理，依赖了单线程事件循环和 IO</summary>
+        
+      
+    
+    
+    
+    
+    <category term="面试" scheme="http://tyrantqiao.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+    <category term="技术" scheme="http://tyrantqiao.com/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+    <category term="Redis" scheme="http://tyrantqiao.com/tags/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RocketMQ技术要点</title>
+    <link href="http://tyrantqiao.com/archives/d4017ef/"/>
+    <id>http://tyrantqiao.com/archives/d4017ef/</id>
+    <published>2024-05-19T11:49:34.000Z</published>
+    <updated>2024-05-19T11:49:34.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;为什么要用消息队列&lt;ul&gt;
+&lt;li&gt;解耦业务逻辑，领域拆分明细&lt;/li&gt;
+&lt;li&gt;异步处理，快速响应用户请求&lt;/li&gt;
+&lt;li&gt;流量削锋&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;核心知识点&quot;&gt;&lt;a href=&quot;#核心知识点&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="面试" scheme="http://tyrantqiao.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+    <category term="技术" scheme="http://tyrantqiao.com/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+    <category term="MQ" scheme="http://tyrantqiao.com/tags/MQ/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>业务中事务一致性怎么处理</title>
+    <link href="http://tyrantqiao.com/archives/730b1c7f/"/>
+    <id>http://tyrantqiao.com/archives/730b1c7f/</id>
+    <published>2023-06-18T14:59:53.000Z</published>
+    <updated>2023-07-09T14:29:27.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;事务&quot;&gt;&lt;a href=&quot;#事务&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="面经" scheme="http://tyrantqiao.com/tags/%E9%9D%A2%E7%BB%8F/"/>
+    
+    <category term="事务" scheme="http://tyrantqiao.com/tags/%E4%BA%8B%E5%8A%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mysql基础看这篇就够了</title>
+    <link href="http://tyrantqiao.com/archives/9cebe623/"/>
+    <id>http://tyrantqiao.com/archives/9cebe623/</id>
+    <published>2023-06-18T09:35:08.000Z</published>
+    <updated>2023-07-09T14:29:27.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Mysql基础&quot;&gt;&lt;a href=&quot;#Mysql基础&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="面经" scheme="http://tyrantqiao.com/tags/%E9%9D%A2%E7%BB%8F/"/>
+    
+    <category term="sql" scheme="http://tyrantqiao.com/tags/sql/"/>
+    
+    <category term="Mysql" scheme="http://tyrantqiao.com/tags/Mysql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>业务架构的思考理解</title>
+    <link href="http://tyrantqiao.com/archives/ab30f775/"/>
+    <id>http://tyrantqiao.com/archives/ab30f775/</id>
+    <published>2023-06-06T15:23:52.000Z</published>
+    <updated>2023-07-09T14:18:17.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;业务架构思考&quot;&gt;&lt;a href=&quot;#业务架构思考&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="架构" scheme="http://tyrantqiao.com/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="Java" scheme="http://tyrantqiao.com/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>chatgpt使用经验</title>
+    <link href="http://tyrantqiao.com/archives/ba50eb49/"/>
+    <id>http://tyrantqiao.com/archives/ba50eb49/</id>
+    <published>2023-05-04T15:39:25.000Z</published>
+    <updated>2023-07-09T14:18:17.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;chatgpt-网站&quot;&gt;&lt;a href=&quot;#chatgpt-网站&quot; class=&quot;headerlink&quot; title=&quot;chatgpt 网站&quot;&gt;&lt;/a&gt;chatgpt 网站&lt;/h1&gt;&lt;div style=&quot;text-align: center&quot;&gt;
+  &lt;div</summary>
+        
+      
+    
+    
+    
+    
+    <category term="chatgpt" scheme="http://tyrantqiao.com/tags/chatgpt/"/>
+    
+    <category term="经验分享" scheme="http://tyrantqiao.com/tags/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2023规划</title>
+    <link href="http://tyrantqiao.com/archives/e787180b/"/>
+    <id>http://tyrantqiao.com/archives/e787180b/</id>
+    <published>2023-05-04T15:30:01.000Z</published>
+    <updated>2023-07-09T14:29:27.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;🆕update&lt;/p&gt;
+&lt;p&gt;以5-27为分界线，准备三个月到8-27&lt;/p&gt;
+&lt;p&gt;最重要的事情：&lt;br&gt;⭐⭐⭐ 职业发展上确定下来新的方向，开始努力准备&lt;br&gt;⭐⭐   认真学习兴趣上面的事情，健身学习&lt;br&gt;⭐⭐⭐</summary>
+        
+      
+    
+    
+    
+    
+    <category term="规划" scheme="http://tyrantqiao.com/tags/%E8%A7%84%E5%88%92/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JDK8特性学习附案例</title>
+    <link href="http://tyrantqiao.com/archives/b97b30cf/"/>
+    <id>http://tyrantqiao.com/archives/b97b30cf/</id>
+    <published>2022-02-13T07:12:48.000Z</published>
+    <updated>2023-07-09T14:18:17.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;JDK8&quot;&gt;&lt;a href=&quot;#JDK8&quot; class=&quot;headerlink&quot; title=&quot;JDK8&quot;&gt;&lt;/a&gt;JDK8&lt;/h1&gt;&lt;h2 id=&quot;Lambda&quot;&gt;&lt;a href=&quot;#Lambda&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Java" scheme="http://tyrantqiao.com/tags/Java/"/>
+    
+    <category term="jdk" scheme="http://tyrantqiao.com/tags/jdk/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>程序员思考之道</title>
+    <link href="http://tyrantqiao.com/archives/aa08646d/"/>
+    <id>http://tyrantqiao.com/archives/aa08646d/</id>
+    <published>2022-01-23T05:41:33.000Z</published>
+    <updated>2023-07-09T14:29:27.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;程序员&quot;&gt;&lt;a href=&quot;#程序员&quot; class=&quot;headerlink&quot; title=&quot;程序员&quot;&gt;&lt;/a&gt;程序员&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;这篇文章主要是总结 Java 方面的，自己学习的一些见解地方&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2</summary>
+        
+      
+    
+    
+    
+    
+    <category term="编程" scheme="http://tyrantqiao.com/tags/%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>扫码登录的实现逻辑</title>
+    <link href="http://tyrantqiao.com/archives/c1ac98b7/"/>
+    <id>http://tyrantqiao.com/archives/c1ac98b7/</id>
+    <published>2021-09-27T10:49:24.000Z</published>
+    <updated>2023-07-09T14:18:17.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;扫码登录&quot;&gt;&lt;a href=&quot;#扫码登录&quot; class=&quot;headerlink&quot; title=&quot;扫码登录&quot;&gt;&lt;/a&gt;扫码登录&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;常见的像桌面版 PC 微信，要求手机扫码登录，点击确认后，PC</summary>
+        
+      
+    
+    
+    
+    
+    <category term="架构" scheme="http://tyrantqiao.com/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OOP面向对象的思想</title>
+    <link href="http://tyrantqiao.com/archives/undefined/"/>
+    <id>http://tyrantqiao.com/archives/undefined/</id>
+    <published>2021-09-16T15:46:46.000Z</published>
+    <updated>2024-06-30T07:20:40.364Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;OOP&quot;&gt;&lt;a href=&quot;#OOP&quot; class=&quot;headerlink&quot; title=&quot;OOP&quot;&gt;&lt;/a&gt;OOP&lt;/h1&gt;&lt;h2 id=&quot;继承与组合&quot;&gt;&lt;a href=&quot;#继承与组合&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="JAVA" scheme="http://tyrantqiao.com/tags/JAVA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring源码系列一始而终</title>
+    <link href="http://tyrantqiao.com/archives/e208775b/"/>
+    <id>http://tyrantqiao.com/archives/e208775b/</id>
+    <published>2021-08-23T22:57:15.000Z</published>
+    <updated>2023-07-09T14:29:27.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Spring&quot;&gt;&lt;a href=&quot;#Spring&quot; class=&quot;headerlink&quot; title=&quot;Spring&quot;&gt;&lt;/a&gt;Spring&lt;/h1&gt;&lt;h2 id=&quot;Conditional&quot;&gt;&lt;a href=&quot;#Conditional&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="源码" scheme="http://tyrantqiao.com/tags/%E6%BA%90%E7%A0%81/"/>
+    
+    <category term="Spring" scheme="http://tyrantqiao.com/tags/Spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何将SpringBoot打成可执行or可依赖jar包</title>
+    <link href="http://tyrantqiao.com/archives/632b580c/"/>
+    <id>http://tyrantqiao.com/archives/632b580c/</id>
+    <published>2021-08-23T22:35:37.000Z</published>
+    <updated>2023-07-09T14:18:17.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;SpringBoot&quot;&gt;&lt;a href=&quot;#SpringBoot&quot; class=&quot;headerlink&quot; title=&quot;SpringBoot&quot;&gt;&lt;/a&gt;SpringBoot&lt;/h1&gt;&lt;h2 id=&quot;JAR包格式的不同&quot;&gt;&lt;a href=&quot;#JAR包格式的不同&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>面经实战到啥都会</title>
+    <link href="http://tyrantqiao.com/archives/22a82e78/"/>
+    <id>http://tyrantqiao.com/archives/22a82e78/</id>
+    <published>2021-08-14T09:19:29.000Z</published>
+    <updated>2023-07-09T14:29:27.000Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    
+    <category term="面经" scheme="http://tyrantqiao.com/tags/%E9%9D%A2%E7%BB%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TIDB 从学习到看论文头疼</title>
+    <link href="http://tyrantqiao.com/archives/ccd61f80/"/>
+    <id>http://tyrantqiao.com/archives/ccd61f80/</id>
+    <published>2021-08-12T14:26:31.000Z</published>
+    <updated>2023-07-09T14:29:27.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;TiDB&quot;&gt;&lt;a href=&quot;#TiDB&quot; class=&quot;headerlink&quot; title=&quot;TiDB&quot;&gt;&lt;/a&gt;TiDB&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;New-sql 型的数据库&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;架构&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="数据库" scheme="http://tyrantqiao.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    <category term="TIDB" scheme="http://tyrantqiao.com/tags/TIDB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hadoop架构原理知识</title>
+    <link href="http://tyrantqiao.com/archives/13c90d26/"/>
+    <id>http://tyrantqiao.com/archives/13c90d26/</id>
+    <published>2021-08-10T21:47:14.000Z</published>
+    <updated>2023-07-09T14:29:27.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Hadoop&quot;&gt;&lt;a href=&quot;#Hadoop&quot; class=&quot;headerlink&quot; title=&quot;Hadoop&quot;&gt;&lt;/a&gt;Hadoop&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;Apache Hadoop 是一款支援數據密集型分布式應用程式並以 Apache</summary>
+        
+      
+    
+    
+    
+    
+    <category term="架构" scheme="http://tyrantqiao.com/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="Hadoop" scheme="http://tyrantqiao.com/tags/Hadoop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>动态规划从套路开始</title>
+    <link href="http://tyrantqiao.com/archives/f53aa71b/"/>
+    <id>http://tyrantqiao.com/archives/f53aa71b/</id>
+    <published>2021-07-25T12:39:58.000Z</published>
+    <updated>2023-07-09T14:29:27.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;动态规划&quot;&gt;&lt;a href=&quot;#动态规划&quot; class=&quot;headerlink&quot; title=&quot;动态规划&quot;&gt;&lt;/a&gt;动态规划&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;动态规划题目一般都是求最 xxx，最大的，最长的</summary>
+        
+      
+    
+    
+    
+    
+    <category term="算法" scheme="http://tyrantqiao.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>springCloud从0到丧心病狂</title>
+    <link href="http://tyrantqiao.com/archives/21d7d33f/"/>
+    <id>http://tyrantqiao.com/archives/21d7d33f/</id>
+    <published>2021-07-18T23:07:29.000Z</published>
+    <updated>2023-07-09T14:18:17.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Spring-Cloud&quot;&gt;&lt;a href=&quot;#Spring-Cloud&quot; class=&quot;headerlink&quot; title=&quot;Spring Cloud&quot;&gt;&lt;/a&gt;Spring</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Java" scheme="http://tyrantqiao.com/tags/Java/"/>
+    
+    <category term="springCloud" scheme="http://tyrantqiao.com/tags/springCloud/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>缓存从0到放弃____吗</title>
+    <link href="http://tyrantqiao.com/archives/20dbf190/"/>
+    <id>http://tyrantqiao.com/archives/20dbf190/</id>
+    <published>2021-07-13T14:07:09.000Z</published>
+    <updated>2023-07-09T14:18:17.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;缓存&quot;&gt;&lt;a href=&quot;#缓存&quot; class=&quot;headerlink&quot; title=&quot;缓存&quot;&gt;&lt;/a&gt;缓存&lt;/h1&gt;&lt;h2 id=&quot;缓存常见架构&quot;&gt;&lt;a href=&quot;#缓存常见架构&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="redis" scheme="http://tyrantqiao.com/tags/redis/"/>
+    
+    <category term="缓存" scheme="http://tyrantqiao.com/tags/%E7%BC%93%E5%AD%98/"/>
+    
+  </entry>
+  
+</feed>
