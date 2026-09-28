@@ -1,0 +1,1517 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="土巴兔 AI 家装增长中台概念演示：覆盖用户导购、平台运营、装修公司、材料商、AI 话术 SOP 与知识库。">
+  <title>土巴兔 AI 家装增长中台产品演示</title>
+  <style>
+    :root {
+      --ink: #16201c;
+      --muted: #66736d;
+      --line: #dfe6e2;
+      --paper: #ffffff;
+      --canvas: #f3f6f4;
+      --green: #18a66a;
+      --green-dark: #08794a;
+      --green-soft: #e8f7ef;
+      --yellow: #f6b73c;
+      --yellow-soft: #fff6df;
+      --red: #d95c4f;
+      --shadow: 0 16px 42px rgba(30, 52, 42, .10);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background: var(--canvas);
+      font-family: Inter, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      letter-spacing: 0;
+    }
+
+    button, input { font: inherit; }
+
+    button { cursor: pointer; }
+
+    .topbar {
+      height: 64px;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      color: #fff;
+      background: var(--green);
+      border-radius: 7px;
+      font-weight: 800;
+      font-size: 17px;
+    }
+
+    .brand-title {
+      font-size: 16px;
+      font-weight: 760;
+      white-space: nowrap;
+    }
+
+    .brand-subtitle {
+      margin-left: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .top-actions { display: flex; gap: 8px; }
+
+    .ghost-button,
+    .solid-button,
+    .choice,
+    .plan-card,
+    .service-row {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      border-radius: 7px;
+      transition: border-color .18s ease, background .18s ease, transform .18s ease, box-shadow .18s ease;
+    }
+
+    .ghost-button,
+    .solid-button {
+      min-height: 38px;
+      padding: 0 15px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .ghost-button:hover { border-color: var(--green); color: var(--green-dark); }
+
+    .solid-button {
+      color: #fff;
+      border-color: var(--green);
+      background: var(--green);
+    }
+
+    .solid-button:hover { background: var(--green-dark); }
+
+    .app-shell {
+      min-height: calc(100vh - 64px);
+      display: grid;
+      grid-template-columns: 220px minmax(420px, 1fr) 340px;
+    }
+
+    .workflow-nav,
+    .insight-panel {
+      background: var(--paper);
+      padding: 28px 22px;
+    }
+
+    .workflow-nav { border-right: 1px solid var(--line); }
+    .insight-panel { border-left: 1px solid var(--line); }
+
+    .section-label {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .step-list {
+      display: grid;
+      gap: 5px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .step-item {
+      min-height: 48px;
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      color: #819088;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .step-number {
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #cfd8d3;
+      border-radius: 50%;
+      font-size: 11px;
+    }
+
+    .step-item.active { color: var(--ink); background: var(--green-soft); }
+    .step-item.active .step-number { color: #fff; border-color: var(--green); background: var(--green); }
+    .step-item.done { color: var(--green-dark); }
+    .step-item.done .step-number { border-color: var(--green); color: var(--green-dark); }
+
+    .nav-note {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .conversation {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      background:
+        linear-gradient(rgba(255,255,255,.62), rgba(255,255,255,.62)),
+        repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(24,166,106,.035) 32px);
+    }
+
+    .conversation-head {
+      padding: 24px 30px 18px;
+      border-bottom: 1px solid rgba(223, 230, 226, .8);
+    }
+
+    .conversation-head h1 {
+      margin: 0 0 7px;
+      font-size: 24px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .conversation-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .chat-stream {
+      flex: 1;
+      overflow: auto;
+      padding: 26px 30px 150px;
+    }
+
+    .message {
+      max-width: 680px;
+      display: flex;
+      gap: 11px;
+      margin: 0 auto 18px;
+      animation: appear .28s ease both;
+    }
+
+    .message.user { justify-content: flex-end; }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: var(--green);
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .bubble {
+      max-width: min(570px, calc(100% - 42px));
+      padding: 13px 15px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 4px 8px 8px 8px;
+      box-shadow: 0 5px 18px rgba(30, 52, 42, .05);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .message.user .bubble {
+      color: #fff;
+      border-color: var(--green-dark);
+      background: var(--green-dark);
+      border-radius: 8px 4px 8px 8px;
+    }
+
+    .bubble strong { font-weight: 800; }
+
+    .decision-zone {
+      position: sticky;
+      bottom: 0;
+      z-index: 10;
+      padding: 16px 30px 22px;
+      background: rgba(243, 246, 244, .94);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--line);
+    }
+
+    .decision-inner { max-width: 680px; margin: auto; }
+
+    .question-title {
+      margin: 0 0 10px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .choices { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .choice {
+      min-height: 40px;
+      padding: 8px 13px;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .choice:hover,
+    .choice:focus-visible {
+      border-color: var(--green);
+      background: var(--green-soft);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .profile-card {
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+    .profile-item {
+      min-height: 59px;
+      padding: 9px 10px;
+      background: var(--canvas);
+      border-radius: 6px;
+    }
+
+    .profile-item span { display: block; color: var(--muted); font-size: 10px; margin-bottom: 5px; }
+    .profile-item strong { display: block; font-size: 12px; line-height: 1.3; }
+    .profile-item.pending strong { color: #a5aea9; font-weight: 550; }
+
+    .insight-section { padding: 22px 0; border-bottom: 1px solid var(--line); }
+
+    .score-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 9px;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .score-track { height: 7px; overflow: hidden; background: #e8ecea; border-radius: 4px; }
+    .score-fill { width: 8%; height: 100%; background: var(--green); transition: width .45s ease; }
+
+    .signal-list { display: grid; gap: 9px; margin-top: 14px; }
+
+    .signal {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .signal b { color: var(--ink); font-size: 11px; }
+
+    .service-list { display: grid; gap: 8px; }
+
+    .service-row {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 34px 1fr auto;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .service-row:hover { border-color: var(--green); transform: translateY(-1px); }
+
+    .service-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 6px;
+      color: var(--green-dark);
+      background: var(--green-soft);
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .service-copy strong,
+    .service-copy small { display: block; }
+    .service-copy strong { font-size: 12px; margin-bottom: 3px; }
+    .service-copy small { color: var(--muted); font-size: 10px; line-height: 1.4; }
+    .service-state { color: #97a29c; font-size: 10px; }
+    .service-row.recommended { border-color: var(--yellow); background: var(--yellow-soft); }
+    .service-row.recommended .service-state { color: #9c6500; font-weight: 800; }
+
+    .plan-board {
+      max-width: 680px;
+      margin: 5px auto 20px;
+      animation: appear .35s ease both;
+    }
+
+    .plan-board > h2 { margin: 0 0 6px; font-size: 18px; }
+    .plan-board > p { margin: 0 0 14px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+
+    .plan-card {
+      min-width: 0;
+      padding: 13px;
+      text-align: left;
+    }
+
+    .plan-card:hover { border-color: var(--green); box-shadow: 0 8px 20px rgba(30,52,42,.08); transform: translateY(-2px); }
+    .plan-card.featured { border: 2px solid var(--green); padding: 12px; }
+
+    .plan-tag {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 3px 6px;
+      color: var(--green-dark);
+      background: var(--green-soft);
+      border-radius: 4px;
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .plan-card h3 { margin: 0 0 4px; font-size: 14px; }
+    .plan-price { margin: 0 0 9px; font-size: 18px; font-weight: 850; }
+    .plan-price small { color: var(--muted); font-size: 10px; font-weight: 550; }
+    .plan-card ul { margin: 0; padding-left: 15px; color: var(--muted); font-size: 11px; line-height: 1.7; }
+
+    .conversion-card {
+      max-width: 680px;
+      margin: 0 auto 20px;
+      padding: 17px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 16px;
+      color: var(--ink);
+      background: var(--yellow-soft);
+      border: 1px solid #efd48a;
+      border-radius: 7px;
+      animation: appear .35s ease both;
+    }
+
+    .conversion-card h3 { margin: 0 0 5px; font-size: 15px; }
+    .conversion-card p { margin: 0; color: #765c22; font-size: 12px; line-height: 1.6; }
+
+    .proof-strip {
+      max-width: 680px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 0 auto 20px;
+    }
+
+    .proof-item { padding: 11px; background: var(--paper); border: 1px solid var(--line); border-radius: 6px; }
+    .proof-item strong { display: block; margin-bottom: 3px; color: var(--green-dark); font-size: 15px; }
+    .proof-item span { color: var(--muted); font-size: 10px; line-height: 1.4; }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(18, 28, 23, .48);
+    }
+
+    .modal.open { display: grid; }
+
+    .modal-card {
+      width: min(440px, 100%);
+      padding: 26px;
+      background: var(--paper);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      animation: appear .22s ease both;
+    }
+
+    .modal-kicker { color: var(--green-dark); font-size: 11px; font-weight: 800; }
+    .modal-card h2 { margin: 8px 0 9px; font-size: 21px; }
+    .modal-card p { margin: 0 0 18px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+    .modal-actions { display: flex; justify-content: flex-end; gap: 8px; }
+
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 80;
+      max-width: 340px;
+      padding: 12px 15px;
+      color: #fff;
+      background: #17261f;
+      border-radius: 6px;
+      box-shadow: var(--shadow);
+      font-size: 12px;
+      line-height: 1.5;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    .role-tabs {
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 7px 28px;
+      overflow-x: auto;
+      background: #17231e;
+      position: sticky;
+      top: 64px;
+      z-index: 19;
+    }
+
+    .role-tab {
+      min-height: 36px;
+      padding: 0 14px;
+      flex: 0 0 auto;
+      color: #b9c5bf;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      background: transparent;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .role-tab:hover { color: #fff; background: rgba(255,255,255,.07); }
+    .role-tab.active { color: #fff; border-color: #3c5549; background: #294237; }
+
+    .demo-data-badge {
+      margin-left: auto;
+      padding: 6px 9px;
+      flex: 0 0 auto;
+      color: #ffda86;
+      border: 1px solid #6f613e;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .role-view { display: none; }
+    .role-view.active { display: grid; }
+
+    .workspace {
+      min-height: calc(100vh - 116px);
+      grid-template-columns: 240px minmax(0, 1fr);
+      background: #edf1ef;
+    }
+
+    .workspace-nav {
+      padding: 26px 18px;
+      background: #1d2a24;
+      color: #d6dfda;
+      border-top: 1px solid #314038;
+    }
+
+    .workspace-nav h2 { margin: 0 10px 20px; color: #fff; font-size: 17px; }
+    .workspace-nav small { display: block; margin: -13px 10px 22px; color: #8ea097; font-size: 12px; line-height: 1.5; }
+
+    .nav-button {
+      width: 100%;
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 11px;
+      color: #b9c5bf;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    .nav-button.active, .nav-button:hover { color: #fff; background: #294237; }
+    .nav-count { min-width: 24px; padding: 2px 5px; text-align: center; color: #fff; background: #3d5a4d; border-radius: 9px; font-size: 10px; }
+
+    .workspace-main { min-width: 0; padding: 26px 28px 50px; }
+
+    .workspace-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .workspace-head h1 { margin: 0 0 7px; font-size: 24px; line-height: 1.25; }
+    .workspace-head p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+
+    .meta-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 27px;
+      padding: 4px 8px;
+      color: #53615a;
+      background: #e9eeeb;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .meta-chip.hot { color: #9a5314; background: #fff0dc; }
+    .meta-chip.good { color: var(--green-dark); background: var(--green-soft); }
+    .meta-chip.alert { color: #a03e35; background: #fdecea; }
+
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 14px; }
+
+    .kpi-card,
+    .panel,
+    .data-table,
+    .lead-card,
+    .sop-detail,
+    .knowledge-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+    }
+
+    .kpi-card { padding: 15px; }
+    .kpi-card span { display: block; color: var(--muted); font-size: 12px; }
+    .kpi-card strong { display: block; margin: 8px 0 4px; font-size: 24px; }
+    .kpi-card small { color: var(--green-dark); font-size: 11px; }
+
+    .dashboard-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(300px, .85fr); gap: 14px; }
+    .dashboard-stack { display: grid; align-content: start; gap: 14px; }
+    .panel { padding: 17px; min-width: 0; }
+    .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 15px; }
+    .panel-head h2 { margin: 0; font-size: 15px; }
+    .panel-head p { margin: 3px 0 0; color: var(--muted); font-size: 11px; }
+
+    .funnel { display: grid; gap: 10px; }
+    .funnel-row { display: grid; grid-template-columns: 92px minmax(0, 1fr) 70px; align-items: center; gap: 10px; font-size: 12px; }
+    .funnel-track { height: 20px; background: #edf1ef; border-radius: 4px; overflow: hidden; }
+    .funnel-bar { height: 100%; display: flex; align-items: center; padding-left: 8px; color: #fff; background: var(--green); border-radius: 4px; font-size: 10px; font-weight: 800; }
+    .funnel-value { text-align: right; color: var(--muted); }
+
+    .line-chart { height: 132px; display: flex; align-items: end; gap: 7px; padding-top: 8px; border-bottom: 1px solid var(--line); }
+    .chart-column { flex: 1; min-width: 12px; position: relative; border-radius: 4px 4px 0 0; background: #cdebdc; }
+    .chart-column.hot { background: var(--green); }
+    .chart-column:hover::after { content: attr(data-value); position: absolute; left: 50%; top: -26px; transform: translateX(-50%); padding: 3px 5px; color: #fff; background: #17231e; border-radius: 4px; font-size: 10px; }
+
+    .data-table { overflow: hidden; }
+    .table-row { display: grid; grid-template-columns: 1.25fr .7fr .7fr .8fr auto; align-items: center; gap: 10px; min-height: 51px; padding: 9px 13px; border-bottom: 1px solid #edf1ef; font-size: 12px; }
+    .table-row:last-child { border-bottom: 0; }
+    .table-row.table-head { min-height: 38px; color: var(--muted); background: #f8faf9; font-size: 11px; font-weight: 750; }
+    .score-pill { padding: 4px 7px; color: var(--green-dark); background: var(--green-soft); border-radius: 5px; font-weight: 800; }
+
+    .proof-card {
+      padding: 14px;
+      border: 1px solid #ecd38e;
+      background: var(--yellow-soft);
+      border-radius: 7px;
+    }
+
+    .proof-card strong { display: block; margin-bottom: 5px; font-size: 14px; }
+    .proof-card p { margin: 0 0 8px; color: #745d27; font-size: 12px; line-height: 1.6; }
+    .proof-source { color: #8a733f; font-size: 10px; }
+
+    .lead-layout { display: grid; grid-template-columns: 310px minmax(0, 1fr); gap: 14px; }
+    .lead-list { display: grid; align-content: start; gap: 9px; }
+    .lead-card { width: 100%; padding: 13px; text-align: left; }
+    .lead-card:hover, .lead-card.active { border-color: var(--green); box-shadow: 0 6px 18px rgba(30,52,42,.08); }
+    .lead-card-top { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 7px; }
+    .lead-card strong { font-size: 13px; }
+    .lead-card p { margin: 0 0 8px; color: var(--muted); font-size: 11px; line-height: 1.6; }
+    .lead-card-meta { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    .lead-detail { display: grid; gap: 14px; }
+    .detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+    .detail-metric { padding: 11px; background: var(--canvas); border-radius: 6px; }
+    .detail-metric span { display: block; color: var(--muted); font-size: 10px; margin-bottom: 5px; }
+    .detail-metric strong { font-size: 13px; }
+
+    .ai-draft { padding: 15px; color: #24332c; background: #f2f8f5; border-left: 3px solid var(--green); font-size: 13px; line-height: 1.75; }
+    .draft-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .capacity-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+    .capacity-day { min-height: 54px; padding: 7px 4px; text-align: center; color: var(--muted); background: var(--canvas); border-radius: 5px; font-size: 10px; }
+    .capacity-day b { display: block; margin-top: 7px; color: var(--ink); font-size: 12px; }
+    .capacity-day.full { color: #9e4a40; background: #fcede9; }
+    .capacity-day.open { color: var(--green-dark); background: var(--green-soft); }
+
+    .material-hero { display: grid; grid-template-columns: minmax(280px, .85fr) minmax(0, 1.15fr); gap: 14px; margin-bottom: 14px; }
+    .room-preview { min-height: 330px; overflow: hidden; position: relative; border-radius: 7px; background: #d9dedb; }
+    .room-preview img { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; }
+    .room-overlay { position: absolute; inset: auto 12px 12px; padding: 12px; color: #fff; background: rgba(18,30,24,.86); border-radius: 6px; }
+    .room-overlay strong { display: block; margin-bottom: 4px; font-size: 14px; }
+    .room-overlay span { font-size: 11px; line-height: 1.5; }
+
+    .demand-list { display: grid; gap: 9px; }
+    .demand-row { display: grid; grid-template-columns: 1fr 70px; gap: 10px; align-items: center; }
+    .demand-row strong { display: block; font-size: 12px; }
+    .demand-row small { color: var(--muted); font-size: 10px; }
+    .demand-meter { height: 7px; margin-top: 7px; overflow: hidden; background: #e7ece9; border-radius: 4px; }
+    .demand-meter i { display: block; height: 100%; background: var(--green); }
+
+    .bundle-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+    .bundle-card { padding: 13px; border: 1px solid var(--line); border-radius: 7px; background: #fff; }
+    .bundle-card.selected { border: 2px solid var(--green); padding: 12px; }
+    .bundle-card h3 { margin: 0 0 4px; font-size: 13px; }
+    .bundle-card p { margin: 0 0 10px; color: var(--muted); font-size: 11px; line-height: 1.6; }
+
+    .sop-layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 14px; }
+    .sop-map { display: grid; align-content: start; gap: 8px; }
+    .sop-node { width: 100%; min-height: 58px; padding: 10px 12px; text-align: left; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
+    .sop-node strong, .sop-node span { display: block; }
+    .sop-node strong { margin-bottom: 4px; font-size: 12px; }
+    .sop-node span { color: var(--muted); font-size: 10px; }
+    .sop-node.active { color: var(--green-dark); border-color: var(--green); background: var(--green-soft); }
+
+    .sop-detail { padding: 18px; }
+    .sop-detail h2 { margin: 0 0 6px; font-size: 18px; }
+    .sop-detail > p { margin: 0 0 16px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .rule-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .rule-box { padding: 13px; background: var(--canvas); border-radius: 6px; }
+    .rule-box span { display: block; margin-bottom: 6px; color: var(--muted); font-size: 10px; font-weight: 750; }
+    .rule-box p { margin: 0; font-size: 12px; line-height: 1.65; }
+
+    .knowledge-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; margin-top: 14px; }
+    .knowledge-card { padding: 13px; }
+    .knowledge-card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 7px; }
+    .knowledge-card strong { font-size: 12px; }
+    .knowledge-card p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
+
+    .retrieval-trace { display: grid; gap: 7px; margin-top: 12px; }
+    .trace-step { display: grid; grid-template-columns: 24px 1fr; gap: 8px; align-items: start; padding: 9px; background: #f7f9f8; border-radius: 5px; font-size: 11px; line-height: 1.55; }
+    .trace-step b { width: 22px; height: 22px; display: grid; place-items: center; color: #fff; background: var(--green); border-radius: 50%; font-size: 9px; }
+
+    .conversion-signals { max-width: 680px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0 auto 20px; }
+    .signal-card { padding: 12px; background: #fff; border: 1px solid var(--line); border-radius: 6px; }
+    .signal-card b { display: block; margin-bottom: 4px; font-size: 15px; }
+    .signal-card span { display: block; color: var(--muted); font-size: 10px; line-height: 1.45; }
+    .signal-card small { display: block; margin-top: 7px; color: #8a733f; font-size: 9px; }
+
+    .scheme-visual { max-width: 680px; height: 230px; position: relative; overflow: hidden; margin: 0 auto 20px; border-radius: 7px; background: #dfe6e2; }
+    .scheme-visual img { width: 100%; height: 100%; object-fit: cover; }
+    .scheme-visual figcaption { position: absolute; left: 12px; right: 12px; bottom: 12px; padding: 9px 11px; color: #fff; background: rgba(15,27,21,.82); border-radius: 5px; font-size: 11px; }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 1080px) {
+      .app-shell { grid-template-columns: 190px minmax(430px, 1fr); }
+      .insight-panel { display: none; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .dashboard-grid, .material-hero { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .role-view:not(.active) { display: none !important; }
+      .topbar { height: auto; min-height: 60px; padding: 12px 14px; }
+      .role-tabs { top: 60px; padding: 7px 14px; }
+      .brand-subtitle { display: none; }
+      .top-actions .ghost-button { display: none; }
+      .app-shell { display: block; }
+      .workflow-nav { padding: 10px 14px; border-right: 0; border-bottom: 1px solid var(--line); overflow-x: auto; }
+      .workflow-nav .section-label, .nav-note { display: none; }
+      .step-list { display: flex; min-width: max-content; }
+      .step-item { min-height: 36px; grid-template-columns: 22px auto; padding: 5px 8px; font-size: 11px; }
+      .step-number { width: 21px; height: 21px; font-size: 9px; }
+      .conversation-head { padding: 18px 17px 14px; }
+      .conversation-head h1 { font-size: 20px; }
+      .chat-stream { padding: 19px 16px 160px; }
+      .decision-zone { padding: 13px 16px 18px; }
+      .plan-grid, .proof-strip { grid-template-columns: 1fr; }
+      .conversion-signals { grid-template-columns: 1fr; }
+      .conversion-card { grid-template-columns: 1fr; }
+      .conversion-card .solid-button { width: 100%; }
+      .brand-title { font-size: 14px; }
+      .workspace { display: block; }
+      .workspace-nav { display: none; }
+      .workspace-main { padding: 18px 14px 40px; }
+      .workspace-head { display: block; }
+      .workspace-head .solid-button { margin-top: 12px; }
+      .kpi-grid { grid-template-columns: 1fr 1fr; }
+      .dashboard-grid, .lead-layout, .sop-layout, .material-hero { grid-template-columns: 1fr; }
+      .table-row { grid-template-columns: 1.2fr .7fr .7fr; }
+      .table-row > :nth-child(4), .table-row > :nth-child(5) { display: none; }
+      .detail-grid, .bundle-grid, .rule-grid, .knowledge-grid { grid-template-columns: 1fr; }
+      .scheme-visual { height: 190px; }
+    }
+
+    @media (max-width: 420px) {
+      .brand-title { display: none; }
+      .topbar { padding-left: 12px; padding-right: 12px; }
+      .top-actions .solid-button { padding: 0 10px; font-size: 11px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">兔</span>
+      <div class="brand-title">AI 家装增长中台<span class="brand-subtitle">多角色产品概念演示</span></div>
+    </div>
+    <div class="top-actions">
+      <button class="ghost-button" id="resetButton" type="button">重新体验</button>
+      <button class="solid-button" id="autoButton" type="button">用户端自动演示</button>
+    </div>
+  </header>
+
+  <nav class="role-tabs" aria-label="产品角色视图">
+    <button class="role-tab active" type="button" data-role="consumer">用户 AI 导购</button>
+    <button class="role-tab" type="button" data-role="platform">平台业务后台</button>
+    <button class="role-tab" type="button" data-role="contractor">装修公司端</button>
+    <button class="role-tab" type="button" data-role="material">材料公司端</button>
+    <button class="role-tab" type="button" data-role="ai-lab">AI 话术与知识库</button>
+    <span class="demo-data-badge">全部指标为模拟数据</span>
+  </nav>
+
+  <main class="app-shell role-view active" data-role-view="consumer">
+    <aside class="workflow-nav" aria-label="导购流程">
+      <p class="section-label">Guide workflow</p>
+      <ol class="step-list" id="stepList"></ol>
+      <p class="nav-note">演示重点：AI 先帮助用户把模糊需求变成方案，再根据风险偏好推荐平台服务，最后交给人工顾问继续承接。</p>
+    </aside>
+
+    <section class="conversation" aria-live="polite">
+      <div class="conversation-head">
+        <h1>把装修焦虑，变成下一步行动</h1>
+        <p>通过几轮轻量问答，生成可比较的装修建议，并在恰当时机匹配平台服务。</p>
+      </div>
+      <div class="chat-stream" id="chatStream"></div>
+      <div class="decision-zone" id="decisionZone">
+        <div class="decision-inner">
+          <p class="question-title" id="questionTitle"></p>
+          <div class="choices" id="choices"></div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="insight-panel">
+      <div class="profile-card">
+        <p class="section-label">实时需求档案</p>
+        <div class="profile-grid" id="profileGrid"></div>
+      </div>
+      <div class="insight-section">
+        <div class="score-head"><span>需求完整度</span><span id="scoreText">8%</span></div>
+        <div class="score-track"><div class="score-fill" id="scoreFill"></div></div>
+        <div class="signal-list">
+          <div class="signal"><span>购买意向</span><b id="intentSignal">探索中</b></div>
+          <div class="signal"><span>首要风险</span><b id="riskSignal">待识别</b></div>
+          <div class="signal"><span>下一最佳动作</span><b id="actionSignal">需求诊断</b></div>
+        </div>
+      </div>
+      <div class="insight-section">
+        <p class="section-label">服务匹配</p>
+        <div class="service-list" id="serviceList"></div>
+      </div>
+    </aside>
+  </main>
+
+  <main class="workspace role-view" data-role-view="platform">
+    <aside class="workspace-nav">
+      <h2>平台业务后台</h2>
+      <small>AI 获客、分发与履约增长</small>
+      <button class="nav-button active" type="button">增长驾驶舱 <span class="nav-count">Live</span></button>
+      <button class="nav-button" type="button">AI 线索池 <span class="nav-count">86</span></button>
+      <button class="nav-button" type="button">供需调度 <span class="nav-count">12</span></button>
+      <button class="nav-button" type="button">履约风险 <span class="nav-count">7</span></button>
+      <button class="nav-button" type="button">实验中心 <span class="nav-count">A/B</span></button>
+    </aside>
+    <section class="workspace-main">
+      <div class="workspace-head">
+        <div>
+          <h1>AI 增长驾驶舱</h1>
+          <p>看清 AI 在“需求完成、有效线索、量房、签约”每一层带来的真实增量。</p>
+        </div>
+        <button class="solid-button" type="button" id="platformDemoButton">演示 AI 调度</button>
+      </div>
+
+      <div class="kpi-grid">
+        <article class="kpi-card"><span>今日 AI 有效线索</span><strong id="platformLeadKpi">286</strong><small>较基线 +31.4%</small></article>
+        <article class="kpi-card"><span>预约量房率</span><strong>18.7%</strong><small>AI 解释推荐 +4.2pp</small></article>
+        <article class="kpi-card"><span>线索响应中位数</span><strong>42 秒</strong><small>自动分发缩短 61%</small></article>
+        <article class="kpi-card"><span>预估签约 GMV</span><strong>¥468 万</strong><small>按已预约线索预测</small></article>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="dashboard-stack">
+          <article class="panel">
+            <div class="panel-head"><div><h2>AI 导购转化漏斗</h2><p>对照组与 AI 组采用同一渠道、城市和预算分层</p></div><span class="meta-chip good">实验运行 14 天</span></div>
+            <div class="funnel">
+              <div class="funnel-row"><span>进入导购</span><div class="funnel-track"><div class="funnel-bar" style="width:100%">12,480</div></div><span class="funnel-value">100%</span></div>
+              <div class="funnel-row"><span>完成画像</span><div class="funnel-track"><div class="funnel-bar" style="width:72%">8,986</div></div><span class="funnel-value">72.0%</span></div>
+              <div class="funnel-row"><span>查看方案</span><div class="funnel-track"><div class="funnel-bar" style="width:51%">6,365</div></div><span class="funnel-value">51.0%</span></div>
+              <div class="funnel-row"><span>提交线索</span><div class="funnel-track"><div class="funnel-bar" style="width:24%">2,995</div></div><span class="funnel-value">24.0%</span></div>
+              <div class="funnel-row"><span>预约量房</span><div class="funnel-track"><div class="funnel-bar" style="width:14%">1,747</div></div><span class="funnel-value">14.0%</span></div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-head"><div><h2>高意向线索实时分发</h2><p>AI 结合预算、履约能力、接单半径与空闲产能评分</p></div><span class="meta-chip">更新于 10:30</span></div>
+            <div class="data-table">
+              <div class="table-row table-head"><span>用户需求</span><span>意向分</span><span>预算</span><span>下一动作</span><span>状态</span></div>
+              <div class="table-row"><strong>浦东 · 85㎡老房</strong><span class="score-pill">92</span><span>15–18万</span><span>报价诊断</span><span class="meta-chip hot">待抢单</span></div>
+              <div class="table-row"><strong>闵行 · 110㎡新房</strong><span class="score-pill">88</span><span>23–28万</span><span>匹配设计师</span><span class="meta-chip good">已响应</span></div>
+              <div class="table-row"><strong>宝山 · 68㎡局改</strong><span class="score-pill">81</span><span>8–10万</span><span>材料包测算</span><span class="meta-chip">培育中</span></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="dashboard-stack">
+          <article class="panel">
+            <div class="panel-head"><div><h2>咨询热度趋势</h2><p>近 12 小时有效会话</p></div><span class="meta-chip hot">+42%</span></div>
+            <div class="line-chart" aria-label="咨询热度柱状图">
+              <i class="chart-column" style="height:34%" data-value="34"></i><i class="chart-column" style="height:41%" data-value="41"></i><i class="chart-column" style="height:38%" data-value="38"></i><i class="chart-column" style="height:50%" data-value="50"></i><i class="chart-column" style="height:55%" data-value="55"></i><i class="chart-column" style="height:62%" data-value="62"></i><i class="chart-column hot" style="height:78%" data-value="78"></i><i class="chart-column hot" style="height:91%" data-value="91"></i>
+            </div>
+          </article>
+          <article class="proof-card">
+            <strong>社会证明必须来自可追溯数据</strong>
+            <p>只有样本量、时间窗和地域范围满足规则时，用户端才展示“附近使用人数”“咨询热度”或“剩余档期”。</p>
+            <span class="proof-source">规则：样本 ≥ 30 · 数据 ≤ 24h · 禁止使用虚构库存</span>
+          </article>
+          <article class="panel" id="dispatchPanel">
+            <div class="panel-head"><div><h2>AI 下一最佳动作</h2><p>当前重点：浦东 85㎡老房翻新</p></div><span class="meta-chip good">可解释</span></div>
+            <div class="detail-grid">
+              <div class="detail-metric"><span>首要顾虑</span><strong>预算增项</strong></div>
+              <div class="detail-metric"><span>推荐供给</span><strong>2 家装企</strong></div>
+              <div class="detail-metric"><span>建议时机</span><strong>现在</strong></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <main class="workspace role-view" data-role-view="contractor">
+    <aside class="workspace-nav">
+      <h2>装修公司工作台</h2>
+      <small>从抢线索到签约的 AI 销售副驾</small>
+      <button class="nav-button active" type="button">机会队列 <span class="nav-count">12</span></button>
+      <button class="nav-button" type="button">AI 跟进 <span class="nav-count">5</span></button>
+      <button class="nav-button" type="button">报价诊断 <span class="nav-count">3</span></button>
+      <button class="nav-button" type="button">设计协同 <span class="nav-count">8</span></button>
+      <button class="nav-button" type="button">产能日历 <span class="nav-count">78%</span></button>
+    </aside>
+    <section class="workspace-main">
+      <div class="workspace-head">
+        <div>
+          <h1>AI 机会队列</h1>
+          <p>不只是给销售一个手机号，而是交付需求摘要、成单障碍与可直接使用的下一句话。</p>
+        </div>
+        <span class="meta-chip alert">未来 14 天量房档期剩 2 个</span>
+      </div>
+
+      <div class="lead-layout">
+        <div class="lead-list" id="leadList">
+          <button class="lead-card active" type="button" data-lead="0"><span class="lead-card-top"><strong>王女士 · 浦东</strong><span class="score-pill">92 分</span></span><p>85㎡老房翻新，预算 15–18 万，担心后期增项。</p><span class="lead-card-meta"><i class="meta-chip hot">10 分钟内联系</i><i class="meta-chip">报价敏感</i></span></button>
+          <button class="lead-card" type="button" data-lead="1"><span class="lead-card-top"><strong>陈先生 · 闵行</strong><span class="score-pill">88 分</span></span><p>110㎡新房，偏自然原木，希望三个月内入住。</p><span class="lead-card-meta"><i class="meta-chip good">已看 4 个案例</i><i class="meta-chip">工期敏感</i></span></button>
+          <button class="lead-card" type="button" data-lead="2"><span class="lead-card-top"><strong>林女士 · 宝山</strong><span class="score-pill">81 分</span></span><p>68㎡厨卫局改，关注环保材料与居住干扰。</p><span class="lead-card-meta"><i class="meta-chip">材料敏感</i><i class="meta-chip">需培育</i></span></button>
+        </div>
+
+        <div class="lead-detail">
+          <article class="panel">
+            <div class="panel-head"><div><h2 id="leadName">王女士的成单作战卡</h2><p id="leadSummary">AI 汇总自 6 轮导购问答与 3 次内容浏览</p></div><button class="solid-button" type="button" id="draftButton">生成跟进话术</button></div>
+            <div class="detail-grid" id="leadMetrics">
+              <div class="detail-metric"><span>成交驱动力</span><strong>预算透明</strong></div>
+              <div class="detail-metric"><span>主要异议</span><strong>担心增项</strong></div>
+              <div class="detail-metric"><span>推荐案例</span><strong>同小区 2 套</strong></div>
+            </div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><div><h2>AI 建议话术</h2><p>从知识库引用事实，销售发送前可编辑</p></div><span class="meta-chip good">已通过合规检查</span></div>
+            <div class="ai-draft" id="contractorDraft">王女士，您最担心后期增项。我们可以先把 85㎡老房常见的拆改、水电和墙面基层漏项做成一张对照表，再看方案，不需要先决定签约。</div>
+            <div class="draft-actions" style="margin-top:12px"><button class="ghost-button contractor-action" type="button">加入同小区案例</button><button class="ghost-button contractor-action" type="button">附报价差异表</button><button class="solid-button contractor-action" type="button">模拟发送</button></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><div><h2>真实产能日历</h2><p>用户端的“档期将满”只读取这里的可预约量</p></div><span class="meta-chip alert">负载 78%</span></div>
+            <div class="capacity-grid"><div class="capacity-day full">周一<b>已满</b></div><div class="capacity-day full">周二<b>已满</b></div><div class="capacity-day open">周三<b>1 档</b></div><div class="capacity-day full">周四<b>已满</b></div><div class="capacity-day open">周五<b>1 档</b></div><div class="capacity-day full">周六<b>已满</b></div><div class="capacity-day full">周日<b>已满</b></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <main class="workspace role-view" data-role-view="material">
+    <aside class="workspace-nav">
+      <h2>材料公司工作台</h2>
+      <small>以真实需求驱动选品与供给</small>
+      <button class="nav-button active" type="button">需求雷达 <span class="nav-count">Live</span></button>
+      <button class="nav-button" type="button">AI 材料包 <span class="nav-count">16</span></button>
+      <button class="nav-button" type="button">样品申请 <span class="nav-count">28</span></button>
+      <button class="nav-button" type="button">渠道报价 <span class="nav-count">6</span></button>
+      <button class="nav-button" type="button">履约反馈 <span class="nav-count">94%</span></button>
+    </aside>
+    <section class="workspace-main">
+      <div class="workspace-head">
+        <div>
+          <h1>AI 材料需求雷达</h1>
+          <p>把“喜欢自然、家里有孩子、怕难打理”翻译成可供货、可报价、可追踪的材料组合。</p>
+        </div>
+        <button class="solid-button" type="button" id="bundleButton">生成专属材料包</button>
+      </div>
+
+      <div class="material-hero">
+        <figure class="room-preview" style="margin:0">
+          <img src="assets/natural-living-room.png" alt="现代原木风客厅方案参考图">
+          <figcaption class="room-overlay"><strong>自然原木平衡方案</strong><span>85㎡老房 · 有儿童 · 预算 15–18 万 · 偏好易维护</span></figcaption>
+        </figure>
+        <article class="panel">
+          <div class="panel-head"><div><h2>本周高潜需求</h2><p>来自用户导购标签与已签约清单，不使用搜索热词冒充订单</p></div><span class="meta-chip good">上海 · 近 7 天</span></div>
+          <div class="demand-list">
+            <div class="demand-row"><div><strong>低甲醛木地板</strong><small>匹配 186 个明确需求</small><div class="demand-meter"><i style="width:88%"></i></div></div><span class="meta-chip hot">+32%</span></div>
+            <div class="demand-row"><div><strong>耐污哑光墙漆</strong><small>匹配 142 个明确需求</small><div class="demand-meter"><i style="width:73%"></i></div></div><span class="meta-chip hot">+21%</span></div>
+            <div class="demand-row"><div><strong>防滑柔光砖</strong><small>匹配 98 个厨卫需求</small><div class="demand-meter"><i style="width:58%"></i></div></div><span class="meta-chip">稳定</span></div>
+            <div class="demand-row"><div><strong>抗菌台面</strong><small>匹配 76 个亲子家庭</small><div class="demand-meter"><i style="width:46%"></i></div></div><span class="meta-chip good">新机会</span></div>
+          </div>
+        </article>
+      </div>
+
+      <article class="panel">
+        <div class="panel-head"><div><h2>AI 生成的三档材料包</h2><p>按用户预算和生活方式组合，不以单品毛利作为唯一排序</p></div><span class="meta-chip">预计覆盖 85㎡</span></div>
+        <div class="bundle-grid" id="bundleGrid">
+          <div class="bundle-card"><h3>预算稳健包</h3><p>强化地板 + 耐擦洗墙漆 + 国产五金，优先保证基础耐用。</p><button class="ghost-button bundle-select" type="button">查看清单</button></div>
+          <div class="bundle-card selected"><h3>亲子环保包</h3><p>低醛地板 + 净味墙漆 + 圆角收口，匹配当前家庭画像。</p><button class="solid-button bundle-select" type="button">AI 推荐</button></div>
+          <div class="bundle-card"><h3>质感升级包</h3><p>三层实木 + 微水泥效果漆 + 高耐久五金，提升触感与质感。</p><button class="ghost-button bundle-select" type="button">查看清单</button></div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <main class="workspace role-view" data-role-view="ai-lab">
+    <aside class="workspace-nav">
+      <h2>AI 运营工作台</h2>
+      <small>话术 SOP、知识库与效果评估</small>
+      <button class="nav-button active" type="button">SOP 编排 <span class="nav-count">6</span></button>
+      <button class="nav-button" type="button">知识库 <span class="nav-count">128</span></button>
+      <button class="nav-button" type="button">事实校验 <span class="nav-count">3</span></button>
+      <button class="nav-button" type="button">对话质检 <span class="nav-count">96%</span></button>
+      <button class="nav-button" type="button">效果评估 <span class="nav-count">A/B</span></button>
+    </aside>
+    <section class="workspace-main">
+      <div class="workspace-head">
+        <div>
+          <h1>AI 话术 SOP 与知识库</h1>
+          <p>运营配置“何时问、问什么、引用什么、何时转人工”，而不是逐句写死机器人回复。</p>
+        </div>
+        <button class="solid-button" type="button" id="retrievalButton">模拟一次知识检索</button>
+      </div>
+
+      <div class="sop-layout">
+        <div class="sop-map" id="sopMap">
+          <button class="sop-node active" type="button" data-sop="0"><strong>1. 意图识别</strong><span>区分灵感浏览、询价、选公司与履约问题</span></button>
+          <button class="sop-node" type="button" data-sop="1"><strong>2. 最小画像</strong><span>只问影响方案与服务的关键字段</span></button>
+          <button class="sop-node" type="button" data-sop="2"><strong>3. 方案解释</strong><span>展示预算、材料、工期与取舍依据</span></button>
+          <button class="sop-node" type="button" data-sop="3"><strong>4. 信任证据</strong><span>调用同城案例、评价、热度和真实产能</span></button>
+          <button class="sop-node" type="button" data-sop="4"><strong>5. 服务转化</strong><span>按顾虑推荐审价、质检、装修保或装企</span></button>
+          <button class="sop-node" type="button" data-sop="5"><strong>6. 人工接管</strong><span>携带摘要、异议与推荐依据交接</span></button>
+        </div>
+
+        <div class="dashboard-stack">
+          <article class="sop-detail">
+            <span class="meta-chip good" id="sopStage">阶段 1 · 自动执行</span>
+            <h2 id="sopTitle">识别用户当前真正要解决的问题</h2>
+            <p id="sopDescription">AI 综合入口、浏览行为与本轮表达识别意图；置信度不足时先澄清，不直接推服务。</p>
+            <div class="rule-grid">
+              <div class="rule-box"><span>触发条件</span><p id="sopTrigger">进入搜索、案例、报价或保障入口，并产生首轮对话。</p></div>
+              <div class="rule-box"><span>必须引用</span><p id="sopKnowledge">用户当前页面、城市服务范围、平台服务定义。</p></div>
+              <div class="rule-box"><span>禁止动作</span><p id="sopGuardrail">不得在意图置信度低于 0.65 时推荐具体公司。</p></div>
+              <div class="rule-box"><span>效果指标</span><p id="sopMetric">二轮继续率、意图识别准确率、负反馈率。</p></div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-head"><div><h2>知识库分层</h2><p>先检索事实，再由模型组织表达；每句话都能回看来源</p></div><span class="meta-chip">128 个知识单元</span></div>
+            <div class="knowledge-grid">
+              <div class="knowledge-card"><div class="knowledge-card-top"><strong>平台服务规则</strong><span class="meta-chip good">已发布</span></div><p>装修保、质检、资金托管、赔付边界与城市覆盖。</p></div>
+              <div class="knowledge-card"><div class="knowledge-card-top"><strong>装企实时能力</strong><span class="meta-chip good">15 分钟同步</span></div><p>服务半径、擅长户型、设计师与量房可预约产能。</p></div>
+              <div class="knowledge-card"><div class="knowledge-card-top"><strong>报价与材料基准</strong><span class="meta-chip">每日更新</span></div><p>城市工价、常见漏项、材料属性、适用场景与库存。</p></div>
+              <div class="knowledge-card"><div class="knowledge-card-top"><strong>真实案例与评价</strong><span class="meta-chip alert">隐私脱敏</span></div><p>同小区、同户型、同预算案例及已核验履约评价。</p></div>
+            </div>
+            <div class="retrieval-trace" id="retrievalTrace">
+              <div class="trace-step"><b>1</b><span>等待演示：点击“模拟一次知识检索”，查看话术如何获得事实依据。</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <span class="modal-kicker">服务承接模拟</span>
+      <h2 id="modalTitle">已生成顾问任务</h2>
+      <p id="modalText"></p>
+      <div class="modal-actions">
+        <button class="ghost-button" id="modalClose" type="button">继续查看</button>
+        <button class="solid-button" id="modalConfirm" type="button">确认预约</button>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+
+  <script>
+    (function () {
+      function switchRole(role) {
+        if (role !== "consumer" && state && state.autoRunning) stopAuto();
+        document.querySelectorAll(".role-tab").forEach(function (button) {
+          button.classList.toggle("active", button.dataset.role === role);
+        });
+        document.querySelectorAll("[data-role-view]").forEach(function (view) {
+          view.classList.toggle("active", view.dataset.roleView === role);
+        });
+        document.getElementById("resetButton").style.visibility = role === "consumer" ? "visible" : "hidden";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      document.querySelectorAll(".role-tab").forEach(function (button) {
+        button.addEventListener("click", function () {
+          switchRole(button.dataset.role);
+        });
+      });
+
+      var steps = [
+        { key: "start", label: "开始诊断" },
+        { key: "house", label: "房屋情况" },
+        { key: "area", label: "面积范围" },
+        { key: "budget", label: "预算边界" },
+        { key: "style", label: "居住偏好" },
+        { key: "concern", label: "核心顾虑" },
+        { key: "result", label: "方案与服务" }
+      ];
+
+      var questions = [
+        {
+          key: "start",
+          title: "准备好后，开始这次装修需求诊断",
+          ai: "你好，我是 AI 装修顾问。我不会先给你推装修公司，而是先用 5 个问题判断你的预算、偏好与风险点，再给出可以比较的方案。",
+          options: [{ label: "开始规划", value: "开始规划", reply: "好，我们开始。" }]
+        },
+        {
+          key: "house",
+          title: "这次准备装修哪类房屋？",
+          ai: "先确认项目类型。它会直接影响拆改成本、工期和适合的服务方式。",
+          options: [
+            { label: "新房整装", value: "新房整装" },
+            { label: "老房翻新", value: "老房翻新" },
+            { label: "局部改造", value: "局部改造" }
+          ]
+        },
+        {
+          key: "area",
+          title: "房屋建筑面积大约是多少？",
+          ai: "面积会和项目类型一起用于估算基础施工量。演示中默认按一线及新一线城市常见区间计算。",
+          options: [
+            { label: "70㎡以内", value: "65㎡", area: 65 },
+            { label: "70–90㎡", value: "85㎡", area: 85 },
+            { label: "90–120㎡", value: "105㎡", area: 105 },
+            { label: "120㎡以上", value: "140㎡", area: 140 }
+          ]
+        },
+        {
+          key: "budget",
+          title: "你希望把硬装与主材总预算控制在哪个范围？",
+          ai: "这里先确定预算边界，后续方案会把钱花在哪里讲清楚，并预留必要的风险金。",
+          options: [
+            { label: "10 万以内", value: "10 万以内", amount: 9 },
+            { label: "10–18 万", value: "10–18 万", amount: 15 },
+            { label: "18–28 万", value: "18–28 万", amount: 23 },
+            { label: "28 万以上", value: "28 万以上", amount: 36 }
+          ]
+        },
+        {
+          key: "style",
+          title: "哪种描述更接近你想要的家？",
+          ai: "风格只是表面，我更关心你日常怎么住。选择最接近的一项，AI 会把它翻译成材料、收纳和施工决策。",
+          options: [
+            { label: "简洁耐看，少造型", value: "现代简约", tag: "少造型、重收纳" },
+            { label: "自然温暖，有生活感", value: "自然原木", tag: "环保、柔和材质" },
+            { label: "质感优先，愿意升级", value: "品质升级", tag: "设计与材料优先" },
+            { label: "实用第一，方便打理", value: "务实耐用", tag: "耐用、易维护" }
+          ]
+        },
+        {
+          key: "concern",
+          title: "做决定前，你最担心哪件事？",
+          ai: "最后识别核心顾虑。推荐服务必须解决你真正担心的问题，而不是把所有产品一起推给你。",
+          options: [
+            { label: "报价虚高或后期增项", value: "预算失控", service: "AI 报价审核" },
+            { label: "施工质量不好", value: "施工质量", service: "第三方节点质检" },
+            { label: "装修公司不靠谱", value: "履约风险", service: "装修保与资金托管" },
+            { label: "材料货不对板", value: "材料风险", service: "材料进场核验" },
+            { label: "工期一拖再拖", value: "工期延误", service: "工期计划与预警" }
+          ]
+        }
+      ];
+
+      var services = [
+        { code: "审价", name: "AI 报价审核", desc: "识别漏项、异常单价与增项风险" },
+        { code: "比选", name: "3 家装企对比", desc: "按同预算、同户型与履约表现筛选" },
+        { code: "质检", name: "第三方节点质检", desc: "水电、泥木、油漆等关键节点验收" },
+        { code: "保障", name: "装修保与资金托管", desc: "按验收节点付款，降低履约风险" }
+      ];
+
+      var state = { index: 0, answers: {}, autoTimer: null, autoRunning: false };
+      var chatStream = document.getElementById("chatStream");
+      var questionTitle = document.getElementById("questionTitle");
+      var choices = document.getElementById("choices");
+      var autoButton = document.getElementById("autoButton");
+
+      function renderSteps() {
+        document.getElementById("stepList").innerHTML = steps.map(function (step, index) {
+          var status = index < state.index ? "done" : index === state.index ? "active" : "";
+          var number = index < state.index ? "✓" : String(index + 1);
+          return '<li class="step-item ' + status + '"><span class="step-number">' + number + '</span><span>' + step.label + '</span></li>';
+        }).join("");
+      }
+
+      function addMessage(type, text) {
+        var item = document.createElement("div");
+        item.className = "message " + type;
+        item.innerHTML = type === "ai"
+          ? '<span class="avatar">AI</span><div class="bubble">' + text + '</div>'
+          : '<div class="bubble">' + text + '</div>';
+        chatStream.appendChild(item);
+        chatStream.scrollTop = chatStream.scrollHeight;
+      }
+
+      function renderQuestion() {
+        var question = questions[state.index];
+        if (!question) return showResult();
+        renderSteps();
+        questionTitle.textContent = question.title;
+        choices.innerHTML = question.options.map(function (option, optionIndex) {
+          return '<button class="choice" type="button" data-option="' + optionIndex + '">' + option.label + '</button>';
+        }).join("");
+        choices.querySelectorAll(".choice").forEach(function (button) {
+          button.addEventListener("click", function () {
+            choose(question.options[Number(button.dataset.option)]);
+          });
+        });
+        window.setTimeout(function () { addMessage("ai", question.ai); }, state.index === 0 ? 80 : 260);
+        updateInsights();
+      }
+
+      function choose(option) {
+        var question = questions[state.index];
+        state.answers[question.key] = option;
+        choices.innerHTML = "";
+        addMessage("user", option.reply || option.label);
+        state.index += 1;
+        updateInsights();
+        window.setTimeout(renderQuestion, state.autoRunning ? 350 : 480);
+      }
+
+      function renderProfile() {
+        var fields = [
+          ["项目", state.answers.house && state.answers.house.value],
+          ["面积", state.answers.area && state.answers.area.value],
+          ["预算", state.answers.budget && state.answers.budget.value],
+          ["偏好", state.answers.style && state.answers.style.value],
+          ["核心顾虑", state.answers.concern && state.answers.concern.value],
+          ["所在城市", "上海（演示）"]
+        ];
+        document.getElementById("profileGrid").innerHTML = fields.map(function (field) {
+          return '<div class="profile-item ' + (field[1] ? "" : "pending") + '"><span>' + field[0] + '</span><strong>' + (field[1] || "待补充") + '</strong></div>';
+        }).join("");
+      }
+
+      function renderServices() {
+        var recommendation = state.answers.concern && state.answers.concern.service;
+        document.getElementById("serviceList").innerHTML = services.map(function (service) {
+          var isRecommended = recommendation && (service.name === recommendation || (recommendation.indexOf("装修保") >= 0 && service.name.indexOf("装修保") >= 0));
+          return '<button type="button" class="service-row ' + (isRecommended ? "recommended" : "") + '" data-service="' + service.name + '">' +
+            '<span class="service-icon">' + service.code + '</span>' +
+            '<span class="service-copy"><strong>' + service.name + '</strong><small>' + service.desc + '</small></span>' +
+            '<span class="service-state">' + (isRecommended ? "优先推荐" : "了解") + '</span></button>';
+        }).join("");
+        document.querySelectorAll(".service-row").forEach(function (button) {
+          button.addEventListener("click", function () {
+            showToast(button.dataset.service + "：在完成需求诊断后，根据用户风险点解释推荐理由。", 2800);
+          });
+        });
+      }
+
+      function updateInsights() {
+        renderProfile();
+        renderServices();
+        var completed = Math.min(Object.keys(state.answers).length, 6);
+        var score = Math.min(100, 8 + completed * 15);
+        document.getElementById("scoreFill").style.width = score + "%";
+        document.getElementById("scoreText").textContent = score + "%";
+        document.getElementById("intentSignal").textContent = completed < 3 ? "探索中" : completed < 6 ? "需求明确" : "高意向";
+        document.getElementById("riskSignal").textContent = state.answers.concern ? state.answers.concern.value : "待识别";
+        document.getElementById("actionSignal").textContent = completed < 4 ? "补全需求" : completed < 6 ? "识别顾虑" : "顾问承接";
+      }
+
+      function getPlanData() {
+        var amount = state.answers.budget ? state.answers.budget.amount : 15;
+        var style = state.answers.style ? state.answers.style.value : "现代简约";
+        var area = state.answers.area ? state.answers.area.area : 85;
+        var factor = area > 120 ? 1.16 : area < 70 ? .9 : 1;
+        var center = Math.round(amount * factor * 10) / 10;
+        return [
+          { tag: "预算稳健", name: "轻量实用方案", price: Math.max(7, Math.round(center * .82)) + "–" + Math.round(center * .96) + " 万", items: ["控制复杂造型", "国产主流材料", "预留 8% 风险金"] },
+          { tag: "AI 推荐", name: style + "平衡方案", price: Math.max(9, Math.round(center * .94)) + "–" + Math.round(center * 1.08) + " 万", items: ["重点空间设计升级", "材料与耐用性平衡", "含平台保障建议"], featured: true },
+          { tag: "品质升级", name: "设计优先方案", price: Math.max(12, Math.round(center * 1.12)) + "–" + Math.round(center * 1.32) + " 万", items: ["全案设计深化", "核心主材升级", "增加过程质检"] }
+        ];
+      }
+
+      function showResult() {
+        state.index = steps.length - 1;
+        renderSteps();
+        updateInsights();
+        questionTitle.textContent = "方案已生成，可点击方案或预约顾问继续演示";
+        choices.innerHTML = '<button class="choice" type="button" id="reviewButton">查看推荐依据</button><button class="solid-button" type="button" id="consultButton">预约免费量房与顾问</button>';
+        var concern = state.answers.concern || { value: "预算与履约", service: "AI 报价审核" };
+        var style = state.answers.style || { tag: "实用、耐用" };
+        addMessage("ai", "需求说明书已生成：你的方案应优先满足 <strong>" + style.tag + "</strong>，并重点控制 <strong>" + concern.value + "</strong>。我准备了三档可比较方案，不会只给一个笼统答案。");
+
+        var visual = document.createElement("figure");
+        visual.className = "scheme-visual";
+        visual.innerHTML = '<img src="assets/natural-living-room.png" alt="现代原木风客厅方案参考图"><figcaption>AI 场景参考 · 依据“少造型、重收纳、易维护”生成材料与空间关键词，不代表最终设计效果。</figcaption>';
+        chatStream.appendChild(visual);
+
+        var board = document.createElement("div");
+        board.className = "plan-board";
+        board.innerHTML = '<h2>三档装修建议</h2><p>价格仅用于流程演示，实际报价需结合城市、户型、材料和现场测量。</p><div class="plan-grid">' + getPlanData().map(function (plan) {
+          return '<button type="button" class="plan-card ' + (plan.featured ? "featured" : "") + '" data-plan="' + plan.name + '"><span class="plan-tag">' + plan.tag + '</span><h3>' + plan.name + '</h3><p class="plan-price">' + plan.price + '<small> 预估</small></p><ul>' + plan.items.map(function (item) { return '<li>' + item + '</li>'; }).join("") + '</ul></button>';
+        }).join("") + '</div>';
+        chatStream.appendChild(board);
+
+        var proof = document.createElement("div");
+        proof.className = "proof-strip";
+        proof.innerHTML = '<div class="proof-item"><strong>3 家</strong><span>同预算装企进入候选池</span></div><div class="proof-item"><strong>5 项</strong><span>报价与履约风险重点复核</span></div><div class="proof-item"><strong>1 份</strong><span>可带走的需求说明书</span></div>';
+        chatStream.appendChild(proof);
+
+        var signals = document.createElement("div");
+        signals.className = "conversion-signals";
+        signals.innerHTML = '<div class="signal-card"><b>附近 186 户</b><span>近 90 天选择了相似预算与风格方案</span><small>模拟数据 · 浦东 5km · 样本已去重</small></div>' +
+          '<div class="signal-card"><b>有效咨询 +42%</b><span>候选装企近 7 日咨询量较上周增长</span><small>模拟数据 · 仅统计有效会话</small></div>' +
+          '<div class="signal-card"><b>剩余 2 个档期</b><span>未来 14 天可预约量房时间</span><small>模拟数据 · 读取装企产能日历</small></div>';
+        chatStream.appendChild(signals);
+
+        var conversion = document.createElement("div");
+        conversion.className = "conversion-card";
+        conversion.innerHTML = '<div><h3>为什么此时推荐“' + concern.service + '”</h3><p>因为你最担心“' + concern.value + '”。先用对应服务降低决策风险，再由顾问承接量房和装企匹配，推荐理由与用户需求一致。</p></div><button class="solid-button" type="button" id="serviceButton">领取该服务</button>';
+        chatStream.appendChild(conversion);
+        chatStream.scrollTop = chatStream.scrollHeight;
+
+        document.querySelectorAll(".plan-card").forEach(function (button) {
+          button.addEventListener("click", function () { showToast("已选择“" + button.dataset.plan + "”，AI 将据此生成材料和装企筛选条件。", 2600); });
+        });
+        document.getElementById("reviewButton").addEventListener("click", function () {
+          showToast("推荐依据：项目类型、面积、预算、居住偏好、核心顾虑与同类履约数据。", 3200);
+        });
+        document.getElementById("consultButton").addEventListener("click", openConsultModal);
+        document.getElementById("serviceButton").addEventListener("click", openConsultModal);
+        stopAuto();
+      }
+
+      function openConsultModal() {
+        var service = state.answers.concern ? state.answers.concern.service : "AI 装修顾问";
+        document.getElementById("modalText").textContent = "系统会把需求说明书、三档预算方案和“" + service + "”推荐原因一起交给人工顾问。真实产品中，用户在这里授权联系方式并选择方便沟通的时间。";
+        document.getElementById("modal").classList.add("open");
+      }
+
+      function closeModal() { document.getElementById("modal").classList.remove("open"); }
+
+      function showToast(text, duration) {
+        var toast = document.getElementById("toast");
+        toast.textContent = text;
+        toast.classList.add("show");
+        window.clearTimeout(showToast.timer);
+        showToast.timer = window.setTimeout(function () { toast.classList.remove("show"); }, duration || 2200);
+      }
+
+      function stopAuto() {
+        state.autoRunning = false;
+        window.clearInterval(state.autoTimer);
+        state.autoTimer = null;
+        autoButton.textContent = "用户端自动演示";
+      }
+
+      function startAuto() {
+        if (state.autoRunning) return stopAuto();
+        switchRole("consumer");
+        if (state.index >= questions.length) reset();
+        state.autoRunning = true;
+        autoButton.textContent = "暂停慢速演示";
+        state.autoTimer = window.setInterval(function () {
+          if (state.index >= questions.length) return stopAuto();
+          var preferred = [0, 1, 1, 1, 0, 0][state.index] || 0;
+          var question = questions[state.index];
+          choose(question.options[preferred]);
+        }, 1900);
+      }
+
+      function reset() {
+        stopAuto();
+        state.index = 0;
+        state.answers = {};
+        chatStream.innerHTML = "";
+        renderQuestion();
+      }
+
+      var leadData = [
+        {
+          name: "王女士的成单作战卡",
+          summary: "AI 汇总自 6 轮导购问答与 3 次内容浏览",
+          metrics: [["成交驱动力", "预算透明"], ["主要异议", "担心增项"], ["推荐案例", "同小区 2 套"]],
+          draft: "王女士，您最担心后期增项。我们可以先把 85㎡老房常见的拆改、水电和墙面基层漏项做成一张对照表，再看方案，不需要先决定签约。"
+        },
+        {
+          name: "陈先生的成单作战卡",
+          summary: "AI 汇总自自然原木案例收藏、工期问答与报价测算",
+          metrics: [["成交驱动力", "按期入住"], ["主要异议", "工期不确定"], ["推荐案例", "90 天完工 3 套"]],
+          draft: "陈先生，您计划三个月内入住。我先把设计确认、主材下单和施工节点倒排成 12 周计划，并标出最容易影响工期的三个决策点，您可以先判断这个节奏是否可行。"
+        },
+        {
+          name: "林女士的成单作战卡",
+          summary: "AI 汇总自厨卫案例、环保材料浏览与居住影响问答",
+          metrics: [["成交驱动力", "低干扰施工"], ["主要异议", "环保与扬尘"], ["推荐案例", "局改案例 5 套"]],
+          draft: "林女士，您最在意施工期间还能正常居住。我们先给您一份分区封闭、除尘和环保材料清单，再按厨卫分别安排工期，先确认对生活影响最小的做法。"
+        }
+      ];
+
+      var sopData = [
+        { stage: "阶段 1 · 自动执行", title: "识别用户当前真正要解决的问题", description: "AI 综合入口、浏览行为与本轮表达识别意图；置信度不足时先澄清，不直接推服务。", trigger: "进入搜索、案例、报价或保障入口，并产生首轮对话。", knowledge: "用户当前页面、城市服务范围、平台服务定义。", guardrail: "不得在意图置信度低于 0.65 时推荐具体公司。", metric: "二轮继续率、意图识别准确率、负反馈率。" },
+        { stage: "阶段 2 · 最多 4 问", title: "用最少问题建立可决策画像", description: "只询问会改变方案、预算或服务推荐的问题；已有数据自动复用，避免用户重复填写。", trigger: "意图明确但面积、预算、房屋状态或核心顾虑缺失。", knowledge: "历史画像、城市装修成本、户型与施工约束。", guardrail: "一次只问一个问题；不得索取身份证、精确住址等非必要信息。", metric: "画像完成率、平均问答轮数、主动退出率。" },
+        { stage: "阶段 3 · 可解释", title: "把推荐结果拆成预算与取舍", description: "输出三档方案，并说明每档方案为什么适合、放弃了什么，以及下一步如何验证。", trigger: "最小画像完整度达到 80%。", knowledge: "城市价格基准、材料属性、施工工艺与同类案例。", guardrail: "价格必须展示区间与影响因素；效果图不得表述为最终交付。", metric: "方案展开率、对比率、收藏率。" },
+        { stage: "阶段 4 · 有证据才展示", title: "用真实社会证明降低决策不确定性", description: "仅在数据足够新、样本足够大且地域相关时，展示附近使用人数、咨询趋势和剩余产能。", trigger: "用户进入装企比较或准备预约量房。", knowledge: "脱敏成交、有效咨询统计、装企实时产能日历。", guardrail: "样本少于 30、数据超过 24 小时或来源不可追溯时不展示。", metric: "证据展开率、预约提升、误导投诉率。" },
+        { stage: "阶段 5 · 一次一个 CTA", title: "按顾虑匹配最小阻力的服务", description: "怕贵推审价，怕质量推质检，怕跑路推装修保；每轮只给一个主要动作。", trigger: "用户表达明确风险，或在方案页停留超过阈值。", knowledge: "服务规则、城市覆盖、用户顾虑与转化实验结果。", guardrail: "不得把高佣金产品置于需求匹配度之前；必须说明推荐原因。", metric: "CTA 点击率、有效线索率、服务取消率。" },
+        { stage: "阶段 6 · 摘要交接", title: "让人工顾问从有上下文的位置接管", description: "向顾问交付需求摘要、用户看过的证据、主要异议、推荐话术和禁止重复询问项。", trigger: "用户预约、主动要求人工，或 AI 连续两次无法解决。", knowledge: "完整会话摘要、授权信息、装企与材料匹配结果。", guardrail: "未授权不得传递联系方式；人工不得再次询问已有答案。", metric: "首响时长、重复提问率、量房预约率。" }
+      ];
+
+      document.querySelectorAll(".workspace-nav .nav-button").forEach(function (button) {
+        button.addEventListener("click", function () {
+          button.parentElement.querySelectorAll(".nav-button").forEach(function (item) { item.classList.remove("active"); });
+          button.classList.add("active");
+          showToast("已切换到“" + button.textContent.trim() + "”模块。此概念演示重点展示核心工作台。", 2400);
+        });
+      });
+
+      document.getElementById("platformDemoButton").addEventListener("click", function () {
+        document.getElementById("platformLeadKpi").textContent = "303";
+        document.getElementById("dispatchPanel").innerHTML = '<div class="panel-head"><div><h2>已完成智能调度</h2><p>根据服务半径、专长、响应率与真实产能分发</p></div><span class="meta-chip good">预计提效 +18%</span></div><div class="ai-draft">浦东 85㎡老房线索已优先分给“老房翻新匹配度 94%、今天可响应”的 2 家装企；一家高评分装企因未来 14 天无量房产能被自动降权。</div>';
+        showToast("AI 已完成一次可解释分发，平台 KPI 与调度原因已更新。", 3000);
+      });
+
+      document.querySelectorAll("#leadList .lead-card").forEach(function (button) {
+        button.addEventListener("click", function () {
+          var data = leadData[Number(button.dataset.lead)];
+          document.querySelectorAll("#leadList .lead-card").forEach(function (item) { item.classList.remove("active"); });
+          button.classList.add("active");
+          document.getElementById("leadName").textContent = data.name;
+          document.getElementById("leadSummary").textContent = data.summary;
+          document.getElementById("leadMetrics").innerHTML = data.metrics.map(function (item) { return '<div class="detail-metric"><span>' + item[0] + '</span><strong>' + item[1] + '</strong></div>'; }).join("");
+          document.getElementById("contractorDraft").textContent = data.draft;
+        });
+      });
+
+      document.getElementById("draftButton").addEventListener("click", function () {
+        document.getElementById("contractorDraft").innerHTML = '<strong>AI 已按当前线索重新生成：</strong><br>先回应用户最在意的风险，再提供一份不要求立即签约的验证材料，最后只邀请一个低门槛动作：预约 20 分钟线上报价诊断。';
+        showToast("话术已按用户画像、当前阶段和装企能力重新生成。", 2800);
+      });
+
+      document.querySelectorAll(".contractor-action").forEach(function (button) {
+        button.addEventListener("click", function () { showToast("已执行：" + button.textContent + "。演示不会真实发送消息。", 2500); });
+      });
+
+      function selectBundle(card) {
+        document.querySelectorAll("#bundleGrid .bundle-card").forEach(function (item) { item.classList.remove("selected"); });
+        card.classList.add("selected");
+        showToast("材料包已切换，AI 将同步更新预算占比、替代品和供货周期。", 2800);
+      }
+
+      document.querySelectorAll(".bundle-select").forEach(function (button) {
+        button.addEventListener("click", function () { selectBundle(button.closest(".bundle-card")); });
+      });
+
+      document.getElementById("bundleButton").addEventListener("click", function () {
+        var recommended = document.querySelector("#bundleGrid .bundle-card:nth-child(2)");
+        selectBundle(recommended);
+        recommended.querySelector("p").textContent = "低醛地板 + 净味墙漆 + 圆角收口；AI 已补充同价替代品与 7 日供货承诺。";
+      });
+
+      document.querySelectorAll("#sopMap .sop-node").forEach(function (button) {
+        button.addEventListener("click", function () {
+          var data = sopData[Number(button.dataset.sop)];
+          document.querySelectorAll("#sopMap .sop-node").forEach(function (item) { item.classList.remove("active"); });
+          button.classList.add("active");
+          document.getElementById("sopStage").textContent = data.stage;
+          document.getElementById("sopTitle").textContent = data.title;
+          document.getElementById("sopDescription").textContent = data.description;
+          document.getElementById("sopTrigger").textContent = data.trigger;
+          document.getElementById("sopKnowledge").textContent = data.knowledge;
+          document.getElementById("sopGuardrail").textContent = data.guardrail;
+          document.getElementById("sopMetric").textContent = data.metric;
+        });
+      });
+
+      document.getElementById("retrievalButton").addEventListener("click", function () {
+        document.getElementById("retrievalTrace").innerHTML = '<div class="trace-step"><b>1</b><span><strong>用户问题：</strong>这家公司是不是快没档期了？</span></div>' +
+          '<div class="trace-step"><b>2</b><span><strong>检索：</strong>读取装企产能日历，未来 14 天可预约量房 2 档，数据更新时间 10:24。</span></div>' +
+          '<div class="trace-step"><b>3</b><span><strong>校验：</strong>数据新鲜度、服务城市、装企 ID 与用户地域均通过；允许展示。</span></div>' +
+          '<div class="trace-step"><b>4</b><span><strong>生成：</strong>“该公司未来 14 天还有 2 个可预约量房时段。档期来自装企实时日历，你也可以比较其他公司。”</span></div>';
+        showToast("知识检索、事实校验和话术生成链路已展开。", 2800);
+      });
+
+      document.getElementById("resetButton").addEventListener("click", reset);
+      autoButton.addEventListener("click", startAuto);
+      document.getElementById("modalClose").addEventListener("click", closeModal);
+      document.getElementById("modalConfirm").addEventListener("click", function () {
+        closeModal();
+        showToast("演示完成：线索、用户需求和推荐原因已交给人工顾问。", 3500);
+      });
+      document.getElementById("modal").addEventListener("click", function (event) {
+        if (event.target.id === "modal") closeModal();
+      });
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") closeModal();
+      });
+
+      renderQuestion();
+    })();
+  </script>
+</body>
+</html>
